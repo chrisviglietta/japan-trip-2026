@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Japan — Places & Plan · Nov 11–23, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#faf8f3; --ink:#23262c; --mut:#6a7079; --rule:#e2ded2; --soft:#f0ede3; --acc:#20242b;
+  --c-tokyo:#00915c; --c-hakone:#2a6db5; --c-kyoto:#d2402e; --c-osaka:#c8871a; --water:#b7d6e4; --loop:#4a7c3f;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181c; --ink:#edeee9; --mut:#9aa1ab; --rule:#33373e; --soft:#1f2227; --acc:#edeee9;
+    --c-tokyo:#2cc488; --c-hakone:#5f9ce0; --c-kyoto:#f06a56; --c-osaka:#f0b04a; --water:#2e4a5a; --loop:#5f9a52;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181c; --ink:#edeee9; --mut:#9aa1ab; --rule:#33373e; --soft:#1f2227; --acc:#edeee9;
+  --c-tokyo:#2cc488; --c-hakone:#5f9ce0; --c-kyoto:#f06a56; --c-osaka:#f0b04a; --water:#2e4a5a; --loop:#5f9a52;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16.5px; line-height:1.65;
+}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); background:var(--bg); z-index:40;}
+.wrap{max-width:860px; margin:0 auto; padding:44px 22px 70px;}
+header h1{font-size:clamp(1.8rem,5.5vw,2.5rem); font-weight:900; margin:0 0 4px; letter-spacing:-.01em;}
+header .meta{color:var(--mut); margin:0; font-weight:500;}
+header .route{margin:16px 0 0; padding:11px 16px; background:var(--soft); border-radius:10px; font-weight:700; font-size:.95rem;}
+header .route span{color:var(--mut); font-weight:500;}
+
+.citytabs{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:30;
+  background:var(--bg); margin:26px -22px 0; padding:12px 22px;
+  border-bottom:2px solid var(--rule);
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+.citytab{
+  font:inherit; font-weight:700; font-size:.92rem; color:var(--ink);
+  background:none; border:2px solid var(--rule); border-radius:999px;
+  padding:5px 16px; cursor:pointer;
+}
+.citytab[aria-selected="true"]{background:var(--acc); color:var(--bg); border-color:var(--acc);}
+.citytab:focus-visible,.daytab:focus-visible{outline:3px solid var(--mut); outline-offset:2px;}
+a.citytab{text-decoration:none; display:inline-flex; align-items:center; color:var(--mut); border-style:dashed;}
+a.citytab:hover{color:var(--ink);}
+
+section.city{display:none; margin-top:26px;}
+section.city.active{display:block;}
+.cityhead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+.cityhead h2{font-size:1.5rem; font-weight:900; margin:0;}
+.cityhead .dates{margin-left:auto; color:var(--mut); font-weight:700; font-size:.95rem;}
+.stay{margin:8px 0 16px; font-size:.95rem; color:var(--mut);}
+.stay b{color:var(--ink); font-weight:700;}
+
+
+.daytabs{display:flex; gap:6px; flex-wrap:wrap; margin:0 0 4px;}
+.daytab{
+  font:inherit; font-weight:700; font-size:.84rem; color:var(--mut);
+  background:var(--soft); border:0; border-radius:8px 8px 0 0;
+  padding:7px 14px; cursor:pointer; border-bottom:3px solid transparent;
+}
+.daytab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--acc);}
+.daypanel{display:none; border-top:3px solid var(--acc);}
+.daypanel.active{display:block;}
+.dayline{color:var(--mut); font-size:.9rem; margin:12px 0 2px; font-weight:700;}
+
+.timeline{margin:12px 0 2px; padding:12px 16px; background:var(--soft); border-radius:12px;}
+.trow{display:flex; gap:14px; padding:3px 0; align-items:baseline;}
+.ttime{flex:0 0 74px; font-weight:700; font-size:.8rem; color:var(--mut); font-variant-numeric:tabular-nums;}
+.tdo{font-size:.9rem;}
+.cols{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; padding-top:12px;}
+@media (max-width:700px){.cols{grid-template-columns:1fr; gap:10px;}}
+.col h4{margin:0 0 9px; font-size:.78rem; font-weight:700; color:var(--mut); border-bottom:1px solid var(--rule); padding-bottom:5px;}
+.item{margin:0 0 13px;}
+.item b{font-weight:700; font-size:.95rem;}
+.item small{display:block; color:var(--mut); font-size:.85rem; line-height:1.5; margin-top:1px;}
+.cat{display:inline-block; font-size:.68rem; font-weight:700; color:var(--mut); border:1px solid var(--rule); border-radius:999px; padding:0 8px; margin-left:6px; vertical-align:2px; white-space:nowrap;}
+.none{color:var(--mut); font-size:.88rem;}
+.bonus{margin:16px 0 4px; padding:11px 15px; border:1.5px dashed var(--rule); border-radius:12px;}
+.bonus h5{margin:0 0 6px; font-size:.75rem; font-weight:700; color:var(--mut);}
+.bonus ul{margin:0; padding-left:18px; font-size:.88rem; color:var(--mut);}
+.bonus li{margin:3px 0;}
+.bonus b{color:var(--ink); font-weight:700;}
+.itin-nav{display:flex; align-items:center; gap:12px; margin:14px 0 8px;}
+.itin-btn{font:inherit; font-weight:900; font-size:1.25rem; line-height:1; color:var(--ink); background:var(--soft); border:2px solid var(--rule); border-radius:999px; min-width:42px; height:42px; cursor:pointer;}
+.itin-btn:disabled{opacity:.3; cursor:default;}
+.itin-btn:focus-visible{outline:3px solid var(--mut); outline-offset:2px;}
+.itin-head{flex:1; text-align:center; font-weight:700;}
+.itin-head small{display:block; font-weight:500; color:var(--mut); font-size:.8rem;}
+#itin-card{border:2px solid var(--rule); border-radius:14px; padding:2px 16px 14px;}
+.ct-tokyo{--cc:var(--c-tokyo);} .ct-hakone{--cc:var(--c-hakone);} .ct-kyoto{--cc:var(--c-kyoto);} .ct-osaka{--cc:var(--c-osaka);}
+.itin-strip{display:flex; gap:5px; flex-wrap:wrap; margin:0 0 12px;}
+.itin-dot{font:inherit; font-size:.72rem; font-weight:700; color:var(--mut); background:var(--soft); border:0; border-bottom:3px solid var(--cc, transparent); border-radius:6px 6px 0 0; padding:4px 9px; cursor:pointer;}
+.itin-dot[aria-current="true"]{color:var(--bg); background:var(--cc);}
+.itin-dot:focus-visible{outline:3px solid var(--mut); outline-offset:2px;}
+#itin-card.ct-tokyo,#itin-card.ct-hakone,#itin-card.ct-kyoto,#itin-card.ct-osaka{border-color:var(--cc);}
+.itin-head .cityname{color:var(--cc);}
+.citytab[data-city="tokyo"]{border-color:var(--c-tokyo);}
+.citytab[data-city="hakone"]{border-color:var(--c-hakone);}
+.citytab[data-city="kyoto"]{border-color:var(--c-kyoto);}
+.citytab[data-city="osaka"]{border-color:var(--c-osaka);}
+.citytab[data-city="tokyo"][aria-selected="true"]{background:var(--c-tokyo); border-color:var(--c-tokyo); color:var(--bg);}
+.citytab[data-city="hakone"][aria-selected="true"]{background:var(--c-hakone); border-color:var(--c-hakone); color:var(--bg);}
+.citytab[data-city="kyoto"][aria-selected="true"]{background:var(--c-kyoto); border-color:var(--c-kyoto); color:var(--bg);}
+.citytab[data-city="osaka"][aria-selected="true"]{background:var(--c-osaka); border-color:var(--c-osaka); color:var(--bg);}
+#tokyo .daytab[aria-selected="true"]{border-bottom-color:var(--c-tokyo);} #tokyo .daypanel{border-top-color:var(--c-tokyo);}
+#hakone .daytab[aria-selected="true"]{border-bottom-color:var(--c-hakone);} #hakone .daypanel{border-top-color:var(--c-hakone);}
+#kyoto .daytab[aria-selected="true"]{border-bottom-color:var(--c-kyoto);} #kyoto .daypanel{border-top-color:var(--c-kyoto);}
+#osaka .daytab[aria-selected="true"]{border-bottom-color:var(--c-osaka);} #osaka .daypanel{border-top-color:var(--c-osaka);}
+
+.endnotes h2{font-size:1.3rem; font-weight:900; margin:4px 0 10px;}
+.endnotes ol{margin:0 0 26px; padding-left:22px;}
+.endnotes li{margin:7px 0;}
+.endnotes p.notes{color:var(--mut); font-size:.93rem; margin:0;}
+.mapcard{margin:48px 0 0; background:#ece0c2; border:2.5px solid #6b4a2f; border-radius:14px; padding:18px 18px 10px;
+  --ink:#523a22; --mut:#8a6b4a; --bg:#f4ecd8; --rule:#cdbb93; --soft:#e4d7b4;
+  --water:#78a9a0; --loop:#7e9a64; --c-kyoto:#b04f38; --c-tokyo:#7e9a64;
+  box-shadow:inset 0 0 70px rgba(107,74,47,.18);}
+.mapcard h2{font-size:1.3rem; font-weight:900; margin:0 0 2px; color:#523a22;}
+.mapcard .sub{color:#8a6b4a; font-size:.88rem; margin:0 0 10px;}
+.mapcard svg{width:100%; height:auto; display:block;}
+.m-red{fill:#b04f38; font-weight:900; font-size:15px;}
+.m-mut{fill:#8a6b4a; font-weight:500; font-size:12px;}
+.m-big{fill:#5e8f87; font-weight:900; font-size:18px; letter-spacing:.14em;}
+.m-stn{fill:#f4ecd8; stroke:#6b4a2f; stroke-width:1.5;}
+.m-numc{fill:#b04f38; stroke:#6b4a2f; stroke-width:1;}
+.m-numt{fill:#f6efdd; font-weight:900; font-size:11px;}
+.m-ban{fill:#f6ecd4; font-weight:900; font-size:12.5px;}
+.mapgrid{display:grid; grid-template-columns:minmax(0,1fr) 225px; gap:16px; align-items:start;}
+@media (max-width:760px){.mapgrid{grid-template-columns:1fr;}}
+.mapkey{font-size:.8rem; color:#8a6b4a; line-height:1.45;}
+.mapkey h3{margin:2px 0 8px; font-size:.84rem; font-weight:900; color:#523a22; border-bottom:2px solid #6b4a2f; padding-bottom:4px;}
+.mapkey ol,.mapkey ul{list-style:none; margin:0 0 14px; padding:0;}
+.mapkey li{margin:5px 0; display:flex; gap:8px; align-items:baseline;}
+.mapkey ul li{align-items:center;}
+.mapkey b{color:#523a22; font-weight:700;}
+.knum{flex:0 0 18px; height:18px; border-radius:50%; background:#b0432f; border:1px solid #6b4a2f; color:#f6efdd; font-weight:900; font-size:10.5px; display:inline-flex; align-items:center; justify-content:center;}
+.kswatch{flex:0 0 20px; width:20px; height:16px; display:inline-block;}
+.ks-loop{flex:0 0 20px; height:4px; background:#7e9a64; border-radius:2px;}
+.ks-rail{flex:0 0 20px; height:0; border-top:2px dotted #8a6b4a;}
+.ks-river{flex:0 0 20px; height:6px; background:#43989a; border-radius:3px;}
+.ks-park{flex:0 0 20px; height:12px; background:rgba(126,154,100,.4); border:1px solid #7e9a64;}
+.ks-ban{flex:0 0 9px; width:9px; height:17px; background:#b0432f; border:1px solid #7c2d1f; border-radius:2px;}
+.mapstage{position:relative;}
+.mapzoom{position:absolute; top:8px; left:8px; display:flex; flex-direction:column; gap:5px; z-index:5;}
+.mapzoom button{width:30px; height:30px; border-radius:8px; border:1.5px solid #6b4a2f; background:#f4ecd8; color:#523a22; font-weight:900; font-size:15px; cursor:pointer; line-height:1;}
+#tokyomap{touch-action:none; cursor:grab;}
+#tokyomap.panning{cursor:grabbing;}
+.mstop{cursor:pointer;}
+.mstop.sel circle{stroke:#f6efdd; stroke-width:3;}
+.kstop{cursor:pointer; border-radius:6px; padding:2px 4px; margin-left:-4px;}
+.kstop.on{background:rgba(176,67,47,.16);}
+.r-lab{fill:#b0432f; font-weight:900; font-size:330px;}
+.r-mut{fill:#8a6b4a; font-weight:700; font-size:240px;}
+.r-sea{fill:#2f7b7c; font-weight:900; font-size:520px; letter-spacing:.2em; opacity:.8;}
+.rcity{cursor:pointer;}
+.rseal{fill:#b0432f; stroke:#6b4a2f; stroke-width:28;}
+.maptabs{display:flex; gap:6px; flex-wrap:wrap; margin:0 0 8px;}
+.mtab{font:inherit; font-weight:700; font-size:.82rem; padding:5px 14px; border-radius:999px; border:1.5px solid #6b4a2f; background:#f4ecd8; color:#523a22; cursor:pointer;}
+.mtab[aria-selected="true"]{background:#523a22; color:#f4ecd8; box-shadow:0 0 0 2px #f4ecd8 inset;}
+.maptoggles{display:flex; gap:6px; flex-wrap:wrap; margin:0 0 10px;}
+.mtog{font:inherit; font-weight:700; font-size:.8rem; padding:5px 13px; border-radius:9px; border:1.5px solid #6b4a2f; background:#f4ecd8; color:#523a22; cursor:pointer;}
+.mtog.on{background:#cfe0b4; border-color:#5f7a46;}
+.m-legend{columns:2; column-gap:26px; margin:12px 4px 8px; padding:0 0 0 2px; list-style:none; font-size:.85rem; color:var(--mut);}
+.m-legend li{margin:4px 0; break-inside:avoid;}
+.m-legend b{color:var(--ink); font-weight:900;}
+@media (max-width:620px){.m-legend{columns:1;}}
+footer{margin-top:44px; color:var(--mut); font-size:.85rem; border-top:1px solid var(--rule); padding-top:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="meta">November 11–23, 2026 · 12 nights · ZIPAIR out of LAX</p>
+  <h1>Japan — the places we're going</h1>
+  <div class="route">Tokyo 3 <span>→</span> Hakone 2 <span>→</span> Kyoto 5 <span>→</span> Osaka 2 <span>· home via KIX → Narita → LAX</span></div>
+  <p class="meta" style="margin-top:10px">🍜 meal · ⛩️ sightseeing · 🎟️ experience · 🚄 travel</p>
+</header>
+
+<div class="citytabs" role="tablist" aria-label="Trip legs">
+  <button class="citytab" data-city="itinerary" role="tab" aria-selected="false">Itinerary</button>
+  <button class="citytab" data-city="tokyo" role="tab" aria-selected="true">Tokyo</button>
+  <button class="citytab" data-city="hakone" role="tab" aria-selected="false">Hakone</button>
+  <button class="citytab" data-city="kyoto" role="tab" aria-selected="false">Kyoto</button>
+  <button class="citytab" data-city="osaka" role="tab" aria-selected="false">Osaka</button>
+  <button class="citytab" data-city="bookings" role="tab" aria-selected="false">Bookings</button>
+  <a class="citytab" id="adamlink" href="https://japan-chris-kacn.pages.dev/explore#c=tokyo&amp;v=visited" target="_blank" rel="noopener">Adam’s app ↗</a>
+</div>
+
+<section class="city" id="itinerary">
+  <div class="cityhead"><h2>Itinerary</h2><span class="dates">one day per card — use the arrows</span></div>
+  <div class="itin-nav">
+    <button class="itin-btn" id="itin-prev" aria-label="Previous day">‹</button>
+    <div class="itin-head" id="itin-head"></div>
+    <button class="itin-btn" id="itin-next" aria-label="Next day">›</button>
+  </div>
+  <div class="itin-strip" id="itin-strip" aria-label="Jump to a day"></div>
+  <div id="itin-card"></div>
+</section>
+
+<section class="city active" id="tokyo">
+  <div class="cityhead"><h2>Tokyo</h2><span class="dates">Wed Nov 11 – Sat Nov 14 · 3 nights</span></div>
+  <p class="stay"><b>Stay:</b> Hotel Sunroute Plaza Shinjuku, 3 nights — Shinjuku Station south exit. Narita Express runs direct to Shinjuku; Udon Shin and Fuunji are minutes away on foot; the Shibuya sumo session and Meiji Shrine are a short hop away; Yoyogi Park is at the doorstep for a backup run. Checkout Saturday morning — big bags takkyubin to Kyoto, the Fuji-day car carries the overnight bags to Hakone.</p>
+  <div class="daytabs" role="tablist" aria-label="Tokyo days">
+    <button class="daytab" aria-selected="true">Wed 11</button>
+    <button class="daytab" aria-selected="false">Thu 12</button>
+    <button class="daytab" aria-selected="false">Fri 13</button>
+    <button class="daytab" aria-selected="false">Sat 14</button>
+  </div>
+  <div class="daypanel active">
+    <p class="dayline">Arrival day — land at Narita, train in, keep it easy. Times assume an afternoon landing; slide everything with your flight.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">~2:00 PM</span><span class="tdo">🚄 Land NRT — Welcome Suica, Narita Express direct to Shinjuku (~80 min)</span></div>
+      <div class="trow"><span class="ttime">4:30 PM</span><span class="tdo">🚄 Check in at Sunroute Plaza — south exit, no transfer</span></div>
+      <div class="trow"><span class="ttime">5:00 PM</span><span class="tdo">🎟️ Walk the neighborhood — Southern Terrace, the backstreets, feel the vibes of home base</span></div>
+      <div class="trow"><span class="ttime">5:45 PM</span><span class="tdo">⛩️ Shibuya Crossing + Mag’s Park — one Yamanote stop; skip if fading</span></div>
+      <div class="trow"><span class="ttime">7:00 PM</span><span class="tdo">🍜 Udon Shin — carbonara udon + a classic bowl, 5-min walk from the hotel</span></div>
+      <div class="trow"><span class="ttime">9:30 PM</span><span class="tdo">🍜 Swing by 7-Eleven — egg sando, onigiri, one mystery dessert — then early sleep; dawn start tomorrow</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Udon Shin</b><small>Shinjuku’s famous handmade udon, 5 minutes from the hotel — split the carbonara udon and a classic bowl. Ticket queue moves fast. (Fuunji tsukemen, also steps away, is the backup if the line is wild.)</small></div>
+        <div class="item"><b>7-Eleven run</b> <span class="cat">late snack</span><small>The inaugural konbini stop — egg sando, onigiri, one mystery dessert. A trip tradition starts tonight.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Settle in + neighborhood lap</b><small>Welcome Suica at the airport, drop bags — then a slow walk of the blocks around the hotel to feel the vibes before dinner.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Shibuya Crossing</b><small>Arrival-night walk to feel the city switch on.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Fuunji</b> — the backup tsukemen bowl, also steps from the hotel</li>
+      <li><b>Don Quijote, Kabukicho</b> — the chaotic late-night megastore run; Kit-Kat flavors + anything you forgot to pack</li>
+      <li><b>Yoyogi Park twilight stroll</b> — at your doorstep, good for shaking off the flight</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Dawn run, old Tokyo, indigo hands-on, then the west-side loop. The fullest day of the trip — cut Koenji if dragging.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">6:00 AM</span><span class="tdo">🎟️ Imperial Palace 5K — Chuo line, 15 min from Shinjuku (Yoyogi Park at the doorstep is the lazy fallback)</span></div>
+      <div class="trow"><span class="ttime">8:00 AM</span><span class="tdo">⛩️ Senso-ji before the tour buses, breakfast nearby</span></div>
+      <div class="trow"><span class="ttime">10:00 AM</span><span class="tdo">🎟️ Wanariya — dye your indigo piece (booked)</span></div>
+      <div class="trow"><span class="ttime">12:15 PM</span><span class="tdo">🎟️ Nakano Broadway — shops open around now</span></div>
+      <div class="trow"><span class="ttime">1:45 PM</span><span class="tdo">🎟️ Koenji vintage racks, one stop over</span></div>
+      <div class="trow"><span class="ttime">2:45 PM</span><span class="tdo">🍜 ISENTEI late pizza lunch, Inokashira Park stroll</span></div>
+      <div class="trow"><span class="ttime">4:15 PM</span><span class="tdo">🎟️ Shimokitazawa — vintage racks, then Oribe coffee + ceramics (closes 6)</span></div>
+      <div class="trow"><span class="ttime">7:00 PM</span><span class="tdo">🍜 Odakyu to Shinjuku — Lad’s Dining if hungry</span></div>
+      <div class="trow"><span class="ttime">8:30 PM</span><span class="tdo">🍜 Bar Coo, Golden Gai — cash</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>ISENTEI</b> <span class="cat">lunch</span><small>Pizzeria inside Inokashira Park — a 200-year-old teahouse, Naples world-championship medalist at the oven.</small></div>
+        <div class="item"><b>Lad's Dining → Bar Coo</b> <span class="cat">dinner + bar</span><small>Shinjuku dinner, then the tiny Golden Gai bar after 8pm. Cash. With pizza at lunch, fine to skip Lad's and go straight to drinks.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Imperial Palace run</b><small>5K at dawn, counterclockwise. Runner stations rent lockers and showers.</small></div>
+        <div class="item"><b>Wanariya</b> <span class="cat">reserve · workshop</span><small>Indigo aizome + shibori dyeing studio a few streets north of Senso-ji — dye your own tenugui or tote (¥2,500–6,500, ~60–90 min). Book the 10am slot; Nakano Broadway opens at noon anyway.</small></div>
+        <div class="item"><b>Koenji + Nakano Broadway</b> <span class="cat">shopping</span><small>Vintage racks, then the otaku collectibles labyrinth one Chuo stop away. Broadway shops open ~noon.</small></div>
+        <div class="item"><b>Shimokitazawa vintage</b> <span class="cat">shopping</span><small>Tokyo’s best secondhand maze — work the racks around the station before Oribe.</small></div>
+        <div class="item"><b>Oribe</b> <span class="cat">cafe + shop</span><small>Shimokitazawa kissaten doubling as a Mino-ware ceramics shop (to 6pm). Odakyu line runs straight to Shinjuku after.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Senso-ji, Asakusa</b><small>Right after the run, before the tour buses.</small></div>
+        <div class="item"><b>Inokashira Park</b><small>Post-lunch stroll — ponds, swan boats, momiji starting.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Lad’s Dining</b> — the pizza dinner, if lunch pizza didn’t cover it</li>
+      <li><b>Swan boat on Inokashira pond</b> — twenty silly minutes after ISENTEI</li>
+      <li><b>One more Golden Gai bar</b> — the alley has 200; Bar Coo is just the opener</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Sumo in the morning, ginkgo gold — Shibuya Sky at sunset only if you feel like it.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">8:30 AM</span><span class="tdo">🍜 Coffee at Southern Terrace — today stays near the hotel until evening</span></div>
+      <div class="trow"><span class="ttime">9:30 AM</span><span class="tdo">🎟️ “Step Into the World of Sumo”, Shibuya — booked, 2 guests</span></div>
+      <div class="trow"><span class="ttime">11:45 AM</span><span class="tdo">⛩️ Meiji Shrine through the forest gate — one Yamanote stop north</span></div>
+      <div class="trow"><span class="ttime">12:45 PM</span><span class="tdo">🎟️ Harajuku — La Forêt browse + PAP Coffee</span></div>
+      <div class="trow"><span class="ttime">2:00 PM</span><span class="tdo">⛩️ Jingu Gaien ginkgo avenue</span></div>
+      <div class="trow"><span class="ttime">3:00 PM</span><span class="tdo">🍜 Tonkatsu Ginza Bairin Honten — katsu sando + katsu set, proper late lunch, no rush</span></div>
+      <div class="trow"><span class="ttime">4:15 PM</span><span class="tdo">⛩️ Optional: Shibuya Sky at sunset (~4:40, needs advance booking) — or just wander Ginza and drift toward Shibuya at your own pace</span></div>
+      <div class="trow"><span class="ttime">6:30 PM</span><span class="tdo">🍜 Tacos 3Hermanos, Harajuku</span></div>
+      <div class="trow"><span class="ttime">8:30 PM</span><span class="tdo">🍜 Mikkeller Tokyo, Shibuya</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>PAP Coffee</b> <span class="cat">coffee</span><small>Harajuku stop between the big sights.</small></div>
+        <div class="item"><b>Tonkatsu Ginza Bairin Honten</b><small>The Ginza katsu-sando originator — the sandwich plus a classic katsu set as a late lunch, between the ginkgo avenue and Shibuya Sky.</small></div>
+        <div class="item"><b>Tacos 3Hermanos → Mikkeller Tokyo</b> <span class="cat">dinner + bar</span><small>Tacos in Harajuku, beers in Shibuya.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Step Into the World of Sumo</b> <span class="cat">booked · 9:30am</span><small>Hands-on morning session in Shibuya, booked via Airbnb for 2 ($126.84 paid). From there it’s one Yamanote stop up to Meiji Shrine.</small></div>
+        <div class="item"><b>Shibuya Sky</b> <span class="cat">optional</span><small>Sunset slot (~4:40pm) needs advance booking — skip guilt-free; the day is complete without it.</small></div>
+        <div class="item"><b>La Forêt</b> <span class="cat">shopping</span><small>Harajuku's fashion layer cake.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Meiji Shrine</b><small>Forest approach, morning quiet.</small></div>
+        <div class="item"><b>Jingu Gaien ginkgo avenue</b><small>The one city foliage that peaks near these dates.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Shibuya Sky at sunset</b> — the optional view; needs an advance slot (~4:40pm)</li>
+      <li><b>Cat Street walk</b> — the backstreet drift from Harajuku down to Shibuya</li>
+      <li><b>Ginza depachika browse</b> — a department-store food hall near Bairin, worth 20 minutes of gawking</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Fuji day, ending at the Hakone hotel — checkout this morning; pray for clear skies and leave by 6:30am.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">6:00 AM</span><span class="tdo">🚄 Checkout + driver pickup with the overnight bags — a driver or rental is the move today, since the day ends in Hakone (big bags went takkyubin to Kyoto Friday night)</span></div>
+      <div class="trow"><span class="ttime">8:30 AM</span><span class="tdo">⛩️ Kawaguchiko maple corridor, Fuji behind</span></div>
+      <div class="trow"><span class="ttime">11:00 AM</span><span class="tdo">⛩️ Lakeside viewpoints — Oishi Park side</span></div>
+      <div class="trow"><span class="ttime">12:30 PM</span><span class="tdo">🍜 Hoto noodle lunch near the lake</span></div>
+      <div class="trow"><span class="ttime">2:00 PM</span><span class="tdo">⛩️ Shiraito Falls</span></div>
+      <div class="trow"><span class="ttime">4:00 PM</span><span class="tdo">🚄 Drive over to Sengokuhara — Kawaguchiko to Hakone is only ~45 min</span></div>
+      <div class="trow"><span class="ttime">5:00 PM</span><span class="tdo">🎟️ Check in at Morinokaze, first onsen soak</span></div>
+      <div class="trow"><span class="ttime">6:30 PM</span><span class="tdo">🍜 Dinner at the hotel</span></div>
+      <div class="trow"><span class="ttime">9:00 PM</span><span class="tdo">🎟️ Night soak — two nights here, nothing to pack</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Hoto noodles, Kawaguchiko</b><small>The lake's thick-noodle miso specialty — any hoto house near the station does it right.</small></div>
+        <div class="item"><b>Dinner at Morinokaze</b><small>Eat at the hotel the first night — you arrive with onsen, not logistics, on the agenda.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>The Fuji loop drive</b><small>Driver or rental car — festival-Saturday traffic is the enemy; early start is the weapon.</small></div>
+        <div class="item"><b>First onsen night</b><small>Arrive at Sengokuhara by five and the hard part of the trip is officially over.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Kawaguchiko maple corridor</b><small>Peak-season tunnels of red with Fuji behind.</small></div>
+        <div class="item"><b>Shiraito Falls</b><small>Spring-fed curtain falls on the mountain's southwest side.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Chureito Pagoda</b> — the famous pagoda-plus-Fuji viewpoint, a short detour with ~400 steps</li>
+      <li><b>Extra Oishi Park time</b> — the lakeside at its calmest late afternoon</li>
+      <li><b>Susuki fields at dusk</b> — a preview walk by the hotel before Sunday’s golden-hour visit</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="city" id="hakone">
+  <div class="cityhead"><h2>Hakone + Kamakura</h2><span class="dates">Sat Nov 14 – Mon Nov 16 · 2 nights</span></div>
+  <p class="stay"><b>Stay:</b> Hotel Morinokaze Hakone Sengokuhara, 2 nights — onsen resort in the Sengokuhara highlands, ~45 min by car from Kawaguchiko, next to the famous silver pampas-grass fields. Tattoos: reserve the private (kashikiri) bath slots — communal baths generally bar them.</p>
+  <div class="daytabs" role="tablist" aria-label="Hakone days">
+    <button class="daytab" aria-selected="true">Sun 15</button>
+    <button class="daytab" aria-selected="false">Mon 16</button>
+  </div>
+  <div class="daypanel active">
+    <p class="dayline">The full Hakone circuit — sculptures, volcano, lake — ending in the bath.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">7:30 AM</span><span class="tdo">🎟️ Morning soak + breakfast at the hotel</span></div>
+      <div class="trow"><span class="ttime">9:00 AM</span><span class="tdo">🚄 Bus from Sengokuhara toward Gora</span></div>
+      <div class="trow"><span class="ttime">9:30 AM</span><span class="tdo">⛩️ Hakone Open-Air Museum — 2 hrs among the sculptures</span></div>
+      <div class="trow"><span class="ttime">12:00 PM</span><span class="tdo">🍜 Lunch in Gora, then the Tozan cable car up to Sounzan</span></div>
+      <div class="trow"><span class="ttime">1:00 PM</span><span class="tdo">🎟️ Ropeway over Owakudani — black eggs at the crater stop</span></div>
+      <div class="trow"><span class="ttime">2:30 PM</span><span class="tdo">🎟️ Ropeway down to Togendai — pirate ship across Lake Ashi</span></div>
+      <div class="trow"><span class="ttime">3:30 PM</span><span class="tdo">⛩️ Hakone Shrine — the torii standing in the water</span></div>
+      <div class="trow"><span class="ttime">4:45 PM</span><span class="tdo">🚄 Bus back toward Sengokuhara</span></div>
+      <div class="trow"><span class="ttime">5:30 PM</span><span class="tdo">⛩️ Susuki pampas-grass fields at golden hour — steps from the hotel, November peak</span></div>
+      <div class="trow"><span class="ttime">6:30 PM</span><span class="tdo">🍜 Dinner at the hotel, long soak after</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Owakudani black eggs</b> <span class="cat">snack</span><small>Boiled in the volcanic springs — each one supposedly buys you seven more years.</small></div>
+        <div class="item"><b>Lunch in Gora</b><small>Soba or tofu near the station before the cable car up.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>The Hakone loop</b><small>Museum → cable car → ropeway → pirate ship — the transit is the attraction. A Hakone Freepass covers it all.</small></div>
+        <div class="item"><b>Onsen, twice</b><small>Morning and night — book the kashikiri private bath if tattoos apply.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Hakone Open-Air Museum</b><small>Sculpture park in the hills — Picasso pavilion, foot bath, fall color between the works.</small></div>
+        <div class="item"><b>Lake Ashi + Hakone Shrine torii</b><small>Fuji behind the lake if it's clear.</small></div>
+        <div class="item"><b>Sengokuhara susuki fields</b><small>Hillsides of silver pampas grass — late-autumn gold, right by Morinokaze.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Pola Museum of Art</b> — Sengokuhara’s glass-and-forest museum, minutes from the hotel; Monet in the woods</li>
+      <li><b>Old cedar avenue, Moto-Hakone</b> — a short stretch of the Edo-era highway by the lake</li>
+      <li><b>A third soak</b> — you have the baths; use them</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Kamakura on the way west — Odawara is only 40 minutes from the Buddha.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">7:30 AM</span><span class="tdo">🎟️ Last soak + breakfast, check out</span></div>
+      <div class="trow"><span class="ttime">9:00 AM</span><span class="tdo">🚄 Bus or taxi down to Odawara</span></div>
+      <div class="trow"><span class="ttime">10:15 AM</span><span class="tdo">🚄 JR to Kamakura (~40 min) — coin-locker the overnight bags</span></div>
+      <div class="trow"><span class="ttime">11:00 AM</span><span class="tdo">⛩️ Great Buddha at Kotoku-in</span></div>
+      <div class="trow"><span class="ttime">12:15 PM</span><span class="tdo">⛩️ Hokokuji bamboo grove + matcha in the garden</span></div>
+      <div class="trow"><span class="ttime">1:30 PM</span><span class="tdo">🍜 Shirasu-don lunch near the station — the Kamakura dish</span></div>
+      <div class="trow"><span class="ttime">2:45 PM</span><span class="tdo">🚄 Back to Odawara, shinkansen west — the evening continues on the Kyoto tab</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Shirasu-don, Kamakura</b><small>Whitebait over rice — the local lunch.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Morning soak</b><small>One last bath before the train west.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Great Buddha (Kotoku-in)</b><small>Kamakura stop one.</small></div>
+        <div class="item"><b>Hokokuji</b><small>The bamboo temple. Engaku-ji only if ahead of schedule.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Engaku-ji</b> — the grand Zen complex at Kita-Kamakura; the designated if-ahead-of-schedule stop</li>
+      <li><b>Komachi-dori</b> — Kamakura’s snack-and-shop street by the station</li>
+      <li><b>Odawara Castle</b> — ten minutes from the shinkansen gate if the timing gods smile</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="city" id="kyoto">
+  <div class="cityhead"><h2>Kyoto</h2><span class="dates">Mon Nov 16 – Sat Nov 21 · 5 nights</span></div>
+  <p class="stay"><b>Stay:</b> Gion — <b>Gion Elite Terrace</b> (friend's pick: fair price, great location, steps from Higashiyama).</p>
+  <div class="daytabs" role="tablist" aria-label="Kyoto days">
+    <button class="daytab" aria-selected="true">Mon 16</button>
+    <button class="daytab" aria-selected="false">Tue 17</button>
+    <button class="daytab" aria-selected="false">Wed 18</button>
+    <button class="daytab" aria-selected="false">Thu 19</button>
+    <button class="daytab" aria-selected="false">Fri 20</button>
+  </div>
+  <div class="daypanel active">
+    <p class="dayline">Arrive from Hakone via Kamakura — evening in the lantern alleys.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">3:30 PM</span><span class="tdo">🚄 Shinkansen Odawara → Kyoto (~2 hrs)</span></div>
+      <div class="trow"><span class="ttime">5:45 PM</span><span class="tdo">🚄 Check in at Gion Elite Terrace — bags are waiting</span></div>
+      <div class="trow"><span class="ttime">7:00 PM</span><span class="tdo">🍜 Dinner on Pontocho — pick a riverside counter</span></div>
+      <div class="trow"><span class="ttime">8:30 PM</span><span class="tdo">⛩️ Gion night walk — Hanamikoji under lanterns</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Dinner on Pontocho</b><small>Pick a riverside counter along the lane — half the point is the alley itself.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Check in to Gion</b><small>Settle into the hotel, get your bearings in the hanamachi.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Gion at night</b><small>Lantern-lit Hanamikoji and the side lanes after dark.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Gion Shirakawa lane</b> — the willow-lined canal street, prettiest after dark</li>
+      <li><b>Kiyomizu-dera autumn night illumination</b> — runs mid-to-late November; a lit preview of Friday’s temple</li>
+      <li><b>Kamo riverbank sit</b> — the classic riverside benches, five minutes from the hotel</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Ten thousand torii before breakfast.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">6:15 AM</span><span class="tdo">🚄 Keihan line south to Fushimi Inari</span></div>
+      <div class="trow"><span class="ttime">7:00 AM</span><span class="tdo">🎟️ Full mountain loop — 2–3 hrs, run the low half</span></div>
+      <div class="trow"><span class="ttime">10:00 AM</span><span class="tdo">⛩️ Tofuku-ji maples next door</span></div>
+      <div class="trow"><span class="ttime">12:00 PM</span><span class="tdo">🍜 Back to Gion — lunch + feet up</span></div>
+      <div class="trow"><span class="ttime">2:30 PM</span><span class="tdo">🎟️ Kamo River — recovery jog or riverside sit</span></div>
+      <div class="trow"><span class="ttime">6:30 PM</span><span class="tdo">🍜 Nandattei ramen (reserved)</span></div>
+      <div class="trow"><span class="ttime">8:30 PM</span><span class="tdo">🎟️ Tree — Gion karaoke</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Nandattei</b> <span class="cat">reserve</span><small>Gion ramen for dinner.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Fushimi Inari full loop</b><small>7am start, 2–3 hrs — runnable low, nearly empty up top.</small></div>
+        <div class="item"><b>Kamo River path</b><small>Free afternoon — recovery jog or riverside sit.</small></div>
+        <div class="item"><b>Tree</b> <span class="cat">karaoke bar</span><small>Gion karaoke after dinner.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Tofuku-ji</b><small>Top maple temple, next door to Inari. Straight after the loop.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Fushimi sake district</b> — Gekkeikan museum tasting (~¥600), two stops from Inari on the free afternoon</li>
+      <li><b>Nintendo Kyoto store</b> — in Takashimaya downtown (confirm this is your “Nintaikeo” and I’ll schedule it properly)</li>
+      <li><b>Kennin-ji</b> — Kyoto’s oldest Zen temple, two minutes from the hotel; twin-dragon ceiling</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Down the river to Arashiyama.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">8:00 AM</span><span class="tdo">🚄 Check boat status, then JR Sagano line to Kameoka</span></div>
+      <div class="trow"><span class="ttime">9:30 AM</span><span class="tdo">🎟️ Hozugawa boat — 2 hrs down the gorge (booked yesterday)</span></div>
+      <div class="trow"><span class="ttime">11:45 AM</span><span class="tdo">⛩️ Land at Togetsukyo Bridge, Arashiyama</span></div>
+      <div class="trow"><span class="ttime">12:30 PM</span><span class="tdo">🍜 Yudofu lunch by the river</span></div>
+      <div class="trow"><span class="ttime">2:00 PM</span><span class="tdo">🎟️ Iwatayama Monkey Park climb — the view over Kyoto</span></div>
+      <div class="trow"><span class="ttime">3:30 PM</span><span class="tdo">⛩️ Riverside wander, quick bamboo pass-through</span></div>
+      <div class="trow"><span class="ttime">5:00 PM</span><span class="tdo">🚄 Back to Gion — rest</span></div>
+      <div class="trow"><span class="ttime">7:00 PM</span><span class="tdo">🍜 Open dinner — pick a Gion counter that looks right</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Lunch in Arashiyama</b><small>Yudofu (simmered tofu) is the local specialty; riverside spots near Togetsukyo.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Hozugawa river boat</b><small>Kameoka → Arashiyama: 16 km of gorge, ~2 hrs. Book online the day before; go/no-go decided day-of on river conditions.</small></div>
+        <div class="item"><b>Iwatayama Monkey Park</b><small>Short climb, monkeys, the best free view over Kyoto.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Arashiyama riverside + Togetsukyo</b><small>Where the boat lands — the gorge in full color.</small></div>
+        <div class="item"><b>Bamboo grove</b><small>Pass-through unless it's early; the river is the show.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>%Arabica, riverside</b> — the famous little coffee counter facing Togetsukyo</li>
+      <li><b>Okochi Sanso villa</b> — the garden above the bamboo grove; entry includes matcha, and crowds don’t follow</li>
+      <li><b>Sagano Romantic Train back</b> — ride the scenic rail up the same gorge you floated down</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Deer day — Nara, go early.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">8:00 AM</span><span class="tdo">🚄 Train to Nara (~1 hr)</span></div>
+      <div class="trow"><span class="ttime">9:15 AM</span><span class="tdo">🎟️ Nara Park — senbei crackers, bowing deer</span></div>
+      <div class="trow"><span class="ttime">10:30 AM</span><span class="tdo">⛩️ Todai-ji — the Great Buddha hall</span></div>
+      <div class="trow"><span class="ttime">12:00 PM</span><span class="tdo">🍜 Nakatanidou warm mochi + lunch nearby</span></div>
+      <div class="trow"><span class="ttime">1:30 PM</span><span class="tdo">⛩️ Kasuga Taisha lantern paths if legs allow</span></div>
+      <div class="trow"><span class="ttime">3:30 PM</span><span class="tdo">🚄 Train back to Kyoto</span></div>
+      <div class="trow"><span class="ttime">6:30 PM</span><span class="tdo">🍜 Quiet Gion dinner — rest before the 6am temple start</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Nakatanidou</b> <span class="cat">takeout</span><small>The high-speed mochi pounders. Eat it warm.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>The bowing deer</b><small>Buy senbei crackers, bow, get mobbed politely.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Todai-ji</b><small>The Great Buddha hall.</small></div>
+        <div class="item"><b>Nara Park</b><small>Kasuga Taisha's lantern paths if you have the legs.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Kasuga Taisha</b> — the thousand stone lanterns through the forest; the best Nara add-on</li>
+      <li><b>Naramachi</b> — the preserved merchant quarter south of the park</li>
+      <li><b>Yoshikien Garden</b> — small, free, and quietly lovely next to the busy stuff</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Higashiyama, properly. Send bags Kyoto → Osaka today.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">6:00 AM</span><span class="tdo">⛩️ Kiyomizu-dera at gates-open — lanes to yourself</span></div>
+      <div class="trow"><span class="ttime">7:30 AM</span><span class="tdo">⛩️ Sannenzaka → Ninenzaka → Higashiyama walk down</span></div>
+      <div class="trow"><span class="ttime">9:30 AM</span><span class="tdo">🚄 Coffee, then takkyubin bags Kyoto → Osaka at the hotel</span></div>
+      <div class="trow"><span class="ttime">11:00 AM</span><span class="tdo">🎟️ Free block — last wander, shopping, or a Kamo run</span></div>
+      <div class="trow"><span class="ttime">4:00 PM</span><span class="tdo">🚄 Rest + dress for dinner</span></div>
+      <div class="trow"><span class="ttime">6:00 PM</span><span class="tdo">🍜 Kaiseki — the splurge (reserved)</span></div>
+      <div class="trow"><span class="ttime">8:30 PM</span><span class="tdo">⛩️ Last Gion night stroll</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Kaiseki dinner</b> <span class="cat">reserve</span><small>The splurge meal — book now.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Free afternoon</b><small>Last Kyoto wander, a Kamo River run, or a tea house sit.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Kiyomizu-dera</b><small>Gates open 6am — go before the lanes wake up.</small></div>
+        <div class="item"><b>Sannenzaka → Ninenzaka → Higashiyama</b><small>The preserved lanes, downhill from the temple.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Kamo River run</b> — the free-block option; flat, riverside, straight from the hotel</li>
+      <li><b>Gion Shirakawa at dusk</b> — if you missed it Monday night</li>
+      <li><b>Anything skipped earlier</b> — Kennin-ji, the sake district, or the Nintendo store all fit this afternoon</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="city" id="osaka">
+  <div class="cityhead"><h2>Osaka</h2><span class="dates">Sat Nov 21 – Mon Nov 23 · 2 nights</span></div>
+  <p class="stay"><b>Stay:</b> Namba / Dotonbori — walkable neon; Nara, Minoh, and KIX trains all leave from here.</p>
+  <div class="daytabs" role="tablist" aria-label="Osaka days">
+    <button class="daytab" aria-selected="true">Sat 21</button>
+    <button class="daytab" aria-selected="false">Sun 22</button>
+    <button class="daytab" aria-selected="false">Mon 23</button>
+  </div>
+  <div class="daypanel active">
+    <p class="dayline">Waterfall in, street food out. Holiday weekend — early starts.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">8:00 AM</span><span class="tdo">🚄 Check out, train toward Osaka — Hankyu up to Minoh</span></div>
+      <div class="trow"><span class="ttime">9:30 AM</span><span class="tdo">🎟️ Minoh Falls trail — 3 km up, momiji tempura on the way</span></div>
+      <div class="trow"><span class="ttime">12:00 PM</span><span class="tdo">🚄 Train into Namba, check in — bags are waiting</span></div>
+      <div class="trow"><span class="ttime">2:00 PM</span><span class="tdo">🎟️ Rest or a first Namba wander</span></div>
+      <div class="trow"><span class="ttime">5:30 PM</span><span class="tdo">⛩️ Dotonbori neon walk — look, do not eat here</span></div>
+      <div class="trow"><span class="ttime">6:30 PM</span><span class="tdo">🍜 Fukutaro — negiyaki in Ura-Namba</span></div>
+      <div class="trow"><span class="ttime">8:30 PM</span><span class="tdo">🍜 ★ Bar Nyuta — the starred nightcap</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Momiji tempura</b> <span class="cat">trail snack</span><small>Fried maple leaves sold along the Minoh path.</small></div>
+        <div class="item"><b>Fukutaro</b><small>Ura-Namba okonomiyaki — the consensus pick. Get the negiyaki.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Minoh Falls hike</b><small>3 km riverside trail at near-peak color, on the way in from Kyoto.</small></div>
+        <div class="item"><b>★ Bar Nyuta</b> <span class="cat">bar · must</span><small>The starred one — your friend’s pick; do not let a long day skip it.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Dotonbori</b><small>Walk the neon for the spectacle; the eating happens in the backstreets.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Hozenji Yokocho</b> — the lantern-lit stone alley with the moss-covered Buddha, one block off Dotonbori</li>
+      <li><b>Namba Yasaka Shrine</b> — the giant lion-head stage, ten minutes from the hotel</li>
+      <li><b>One more Ura-Namba counter</b> — kushikatsu or a standing bar after Nyuta</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">Mushroom kingdom.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">6:30 AM</span><span class="tdo">🎟️ Osaka Castle moat run — last run of the trip</span></div>
+      <div class="trow"><span class="ttime">8:30 AM</span><span class="tdo">🚄 Head to USJ — arrive before the gates</span></div>
+      <div class="trow"><span class="ttime">10:00 AM</span><span class="tdo">🎟️ Super Nintendo World — Express Pass timed entry</span></div>
+      <div class="trow"><span class="ttime">12:30 PM</span><span class="tdo">🍜 Kinopio’s Cafe — join the app queue early</span></div>
+      <div class="trow"><span class="ttime">2:30 PM</span><span class="tdo">🎟️ Rest of the park — ride what the holiday crowd allows</span></div>
+      <div class="trow"><span class="ttime">7:00 PM</span><span class="tdo">🍜 Back to Namba — easy Ura-Namba dinner, pack tonight</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>Kinopio's Cafe, USJ</b><small>The Toadstool cafe inside Nintendo World — queue via the park app early.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <div class="item"><b>Osaka Castle moat run</b><small>Dawn, ~4 km loop. Last run of the trip.</small></div>
+        <div class="item"><b>Super Nintendo World</b><small>Holiday Sunday — Express Pass with timed Nintendo entry is mandatory.</small></div>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <div class="item"><b>Osaka Castle</b><small>From the moat path in morning light — no need to go inside.</small></div>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Harry Potter area at USJ</b> — the other world-class zone, if the Express Pass covers it</li>
+      <li><b>Dotonbori round two</b> — the neon hits different when you’re not hungry</li>
+      <li><b>Early pack + 551 recon</b> — scope the Namba Station counter so tomorrow’s grab is fast</li>
+    </ul></div>
+  </div>
+  <div class="daypanel">
+    <p class="dayline">The long way home: Peach KIX → Narita, then ZIPAIR to LAX. Build a 4+ hour Narita buffer — holiday Monday.</p>
+    <div class="timeline">
+      <div class="trow"><span class="ttime">7:00 AM</span><span class="tdo">🍜 Final pack — 551 Horai pork buns at Namba Station</span></div>
+      <div class="trow"><span class="ttime">8:00 AM</span><span class="tdo">🚄 Nankai rapid to KIX (~45 min) — holiday padding</span></div>
+      <div class="trow"><span class="ttime">Late AM</span><span class="tdo">🚄 Earliest Peach to Narita</span></div>
+      <div class="trow"><span class="ttime">+4 hrs</span><span class="tdo">🚄 Narita: collect bags, re-check with ZIPAIR, exhale</span></div>
+      <div class="trow"><span class="ttime">Evening</span><span class="tdo">🚄 ZIPAIR to LAX — land the same day, date line in reverse</span></div>
+    </div>
+    <div class="cols">
+      <div class="col"><h4>Meals</h4>
+        <div class="item"><b>551 Horai</b> <span class="cat">takeout</span><small>Pork buns at Namba Station — the correct last bite of Osaka, and good plane food.</small></div>
+      </div>
+      <div class="col"><h4>Experiences</h4>
+        <p class="none">Travel day — nothing scheduled.</p>
+      </div>
+      <div class="col"><h4>Sightseeing</h4>
+        <p class="none">One last Namba wander if the morning allows.</p>
+      </div>
+    </div>
+    <div class="bonus"><h5>Bonuses — only if time allows</h5><ul>
+      <li><b>Takashimaya depachika sweep</b> — omiyage sweets for home, right at Namba Station</li>
+      <li><b>Namba Yasaka Shrine</b> — if Saturday skipped it; five minutes, one great photo</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="city endnotes" id="bookings">
+  <h2>Book, in this order</h2>
+  <ol>
+    <li>USJ Express Pass with timed Nintendo entry (Sun Nov 22) — holiday dates sell out first</li>
+    <li>Morinokaze Hakone Sengokuhara — booked Nov 14–16; reserve the private (kashikiri) bath slots and your dinner seatings now</li>
+    <li>Gion Elite Terrace, Kyoto (Nov 16–21)</li>
+    <li>Flights check: confirm Peach KIX→NRT clears a 4-hour ZIPAIR connection before locking the rest</li>
+    <li>Optional: Shibuya Sky sunset slot, Fri Nov 13 — only if you decide you want it; sells out days ahead</li>
+    <li>Kaiseki dinner (Fri Nov 20) and Nandattei (Tue Nov 17)</li>
+    <li>Hozugawa boat — online the day before Nov 18</li>
+    <li>✓ Sumo booked — “Step Into the World of Sumo in Shibuya,” Fri Nov 13, 9:30am. Still to book: Wanariya indigo workshop, 10am slot (Thu Nov 12), reservation-only</li>
+  </ol>
+  <p class="notes">Good to know: Nov 21–23 is Labor Thanksgiving weekend (this plan leaves Kyoto before it peaks). 2026 foliage is running late — city ginkgo peaks ~Nov 24–27, so the best maple color is at elevation: Kawaguchiko, Hakone, and Minoh, all on the route. Tattoos: private-bath onsen only. November sumo is in Fukuoka and the Tokyo stables empty out with it (no morning practice until December), so the retired-pro show is the real option — or upgrade to the Ginza hands-on training session with a former top-division rikishi. Baseball season is over.</p>
+</section>
+
+<div class="mapcard">
+  <h2>Tokyo, mapped</h2>
+  <p class="sub">An orientation map, drawn to real geography — learn the lay of the land first; flip on “My stops” to overlay the itinerary seals. Zoom with + / −, drag to move.</p>
+  <div class="maptabs" role="tablist" aria-label="Map areas">
+    <button class="mtab" data-view="all" aria-selected="true">All Tokyo</button>
+    <button class="mtab" data-view="west" aria-selected="false">West side</button>
+    <button class="mtab" data-view="central" aria-selected="false">Central</button>
+    <button class="mtab" data-view="old" aria-selected="false">Old Tokyo</button>
+    <button class="mtab" data-view="bay" aria-selected="false">Bay</button>
+    <button class="mtab" data-view="route" aria-selected="false">Whole route</button>
+  </div>
+  <div class="maptoggles">
+    <button class="mtog on" data-layer="icons" aria-pressed="true">Illustrated places</button>
+    <button class="mtog on" data-layer="rail" aria-pressed="true">Rail connections</button>
+    <button class="mtog" data-layer="stops" aria-pressed="false">My stops</button>
+  </div>
+  <div class="mapgrid"><div class="mapleft mapstage">
+  <div class="mapzoom"><button id="mz-in" type="button" aria-label="Zoom in">+</button><button id="mz-out" type="button" aria-label="Zoom out">−</button><button id="mz-reset" type="button" aria-label="Back to Tokyo">⌂</button><button id="mz-world" type="button" aria-label="See the whole route">🗾</button></div>
+  <svg id="tokyomap" viewBox="0 0 760 640" role="img" aria-label="Stylized map of Tokyo: the Yamanote loop with Shinjuku, Harajuku and Shibuya on the west side, Ueno, Akihabara, Tokyo Station and Ginza on the east, the Imperial Palace in the middle, Asakusa and Skytree across the Sumida River, Tokyo Tower in the south, Tokyo Bay with the Rainbow Bridge and Odaiba, and Nakano, Koenji, Kichijoji and Shimokitazawa to the west. Numbered markers show the trip's stops.">
+    <defs>
+      <filter id="wob" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/></filter>
+      <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0.42  0 0 0 0 0.33  0 0 0 0 0.2  0 0 0 0.05 0"/></filter>
+    </defs>
+    <rect x="-12400" y="-3800" width="14160" height="11924" fill="#43989a"/>
+    <g id="regionLayer" style="display:none">
+      <path d="M-12150,2600 C-12000,3100 -11750,3800 -11430,4330 C-11250,4600 -11000,4300 -10850,3950 C-10770,3730 -10740,3660 -10705,3626 C-10500,3900 -10300,4400 -10000,4700 C-9600,5100 -9100,5200 -8700,4900 C-8300,4600 -8100,4200 -7900,3800 C-7760,3420 -7700,3260 -7600,3200 C-7300,3350 -7000,3900 -6600,4300 C-6100,4500 -5400,4200 -4800,3800 C-4200,3500 -3600,3450 -3200,3400 C-2950,3000 -2750,2550 -2600,2350 C-2350,2650 -2150,3100 -1850,3350 C-1650,3650 -1450,3700 -1300,3400 C-1150,3000 -1000,2500 -850,2200 C-600,1850 -350,1600 -150,1500 C150,1600 350,1900 450,2100 C600,2300 700,2200 700,1900 C650,1500 560,1000 540,660 C560,480 600,420 650,380 C720,340 800,380 840,600 C880,1000 980,1600 1100,2000 C1200,2300 1400,2200 1500,1800 C1600,1200 1650,400 1700,-200 L1700,-1000 L-12150,-1000 Z" fill="#efe3c2" stroke="#bd7a40" stroke-width="44" stroke-linejoin="round"/>
+      <path d="M380,320 L-2104,831 L-1428,1602 L-1044,1649 L-3,1438 L-1044,1649 L-9999,2467 L-10705,3626 L-11384,4403 M-9999,2467 L-9812,3562" fill="none" stroke="#8a6b4a" stroke-width="38" stroke-dasharray="90 150" stroke-linecap="round"/>
+      <g stroke="#4e6b3c" stroke-width="26" stroke-linejoin="round">
+        <path d="M-2560,1640 L-2168,1040 L-1776,1640 Z" fill="#7d9a5e"/>
+        <path d="M-2340,1300 L-2168,1040 L-1996,1300 L-2060,1250 L-2120,1310 L-2168,1240 L-2216,1310 L-2276,1250 Z" fill="#f8f1e0"/>
+        <path d="M-4900,700 L-4600,260 L-4300,700 Z" fill="#86a35e"/>
+        <path d="M-4450,760 L-4200,380 L-3950,760 Z" fill="#769455"/>
+        <path d="M-1700,1560 L-1520,1300 L-1340,1560 Z" fill="#93ad6b"/>
+      </g>
+      <rect class="rcity" data-city="tokyo" x="-50" y="-50" width="860" height="740" rx="70" fill="rgba(176,67,47,.07)" stroke="#b0432f" stroke-width="28" stroke-dasharray="100 80"/>
+      <text class="r-lab" x="380" y="-180" text-anchor="middle">Tokyo · 3 nights</text>
+      <text class="r-mut" x="380" y="980" text-anchor="middle">tap to zoom in</text>
+      <circle class="rcity rseal" data-x="-2104" data-y="831" cx="-2104" cy="831" r="170"/>
+      <text class="r-mut" x="-2104" y="560" text-anchor="middle">Kawaguchiko · Fuji day</text>
+      <text class="r-mut" x="-2168" y="1960" text-anchor="middle">Mt. Fuji</text>
+      <circle class="rcity rseal" data-x="-1428" data-y="1602" cx="-1428" cy="1602" r="170"/>
+      <text class="r-lab" x="-1100" y="1900">Hakone · 2 nights</text>
+      <circle class="rcity rseal" data-x="-3" data-y="1438" cx="-3" cy="1438" r="150"/>
+      <text class="r-mut" x="220" y="1380">Kamakura · Mon stop</text>
+      <circle class="rcity rseal" data-x="-9999" data-y="2467" cx="-9999" cy="2467" r="170"/>
+      <text class="r-lab" x="-9999" y="2160" text-anchor="middle">Kyoto · 5 nights</text>
+      <circle class="rcity rseal" data-x="-9812" data-y="3562" cx="-9812" cy="3562" r="150"/>
+      <text class="r-mut" x="-9560" y="3620">Nara · day trip</text>
+      <circle class="rcity rseal" data-x="-10705" data-y="3626" cx="-10705" cy="3626" r="170"/>
+      <text class="r-lab" x="-10950" y="3480" text-anchor="end">Osaka · 2 nights</text>
+      <circle class="rcity rseal" data-x="-11384" data-y="4403" cx="-11384" cy="4403" r="140"/>
+      <text class="r-mut" x="-11640" y="4460" text-anchor="end">KIX · fly home Mon 23</text>
+      <text class="r-sea" x="-5200" y="6400" text-anchor="middle">PACIFIC OCEAN</text>
+      <g fill="#f1e8cd" opacity="0.96"><ellipse cx="-7400" cy="900" rx="1100" ry="300"/><ellipse cx="-6400" cy="700" rx="900" ry="340"/><ellipse cx="-6900" cy="1080" rx="1400" ry="240"/><ellipse cx="-11000" cy="1400" rx="1000" ry="300"/><ellipse cx="-10200" cy="1250" rx="800" ry="260"/><ellipse cx="-3400" cy="5400" rx="1100" ry="300"/><ellipse cx="-2500" cy="5250" rx="800" ry="260"/></g>
+    </g>
+    <path id="tokland" d="M0,0 L760,0 L760,345 C736,352 710,356 686,358 C664,360 646,362 631,362 C615,364 600,366 590,368 C586,368 584,368 582,367 C577,360 574,350 573,340 C569,347 564,354 560,362 C553,378 546,394 539,412 C534,432 532,450 531,469 C536,486 541,502 545,520 C550,538 554,556 556,575 C558,596 560,618 562,640 L0,640 Z" fill="#efe3c2" stroke="#bd7a40" stroke-width="4" stroke-linejoin="round"/>
+    <g id="tokmain" filter="url(#wob)">
+    <text class="m-mut" x="728" y="38" text-anchor="middle" font-weight="900">N</text>
+    <path d="M728,48 L728,78 M728,48 L722,60 M728,48 L734,60" stroke="var(--mut)" stroke-width="2" fill="none"/>
+    <polygon points="565,392 615,386 625,420 575,432" fill="#efe3c2" stroke="#bd7a40" stroke-width="3"/>
+    <path d="M686,10 C675,45 660,80 658,124 C652,165 643,190 623,228 C608,254 586,278 573,315 C568,340 578,355 584,368" fill="none" stroke="#43989a" stroke-width="8" stroke-linecap="round"/>
+    <path class="lyr-rail" d="M571,224 C560,195 520,200 470,205 C430,208 410,200 394,194 C360,180 330,150 303,130 C285,135 272,140 260,142 C200,150 130,158 72,161" fill="none" stroke="#8a6b4a" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round" opacity="0.8"/>
+    <path class="lyr-rail" d="M397,302 C360,297 335,293 310,290 C230,270 150,205 72,165" fill="none" stroke="#8a6b4a" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round" opacity="0.65"/>
+    <polygon points="516,196 556,194 558,226 534,232 514,222" fill="#7e9a64" opacity="0.4"/>
+    <polygon points="370,240 400,238 404,268 376,274" fill="#7e9a64" opacity="0.4"/>
+    <ellipse cx="424" cy="210" rx="16" ry="10" fill="#7e9a64" opacity="0.4"/>
+    <ellipse cx="588" cy="104" rx="14" ry="12" fill="#7e9a64" opacity="0.4"/>
+    <ellipse cx="585" cy="112" rx="6" ry="4" fill="#43989a"/>
+    <ellipse cx="72" cy="164" rx="12" ry="5" fill="#43989a"/>
+    <path class="lyr-rail" d="M394,194 C390,168 396,140 403,120 C408,96 414,76 422,62 C436,56 452,57 467,56 C482,52 498,46 515,38 C528,34 542,32 554,33 C566,42 574,55 581,70 C588,84 593,98 597,114 C594,132 590,150 586,166 C584,174 583,181 581,188 C578,200 575,212 571,224 C564,241 556,258 548,274 C546,287 545,299 545,311 C537,322 528,332 519,343 C511,362 503,381 496,400 C488,411 478,421 469,430 C464,423 460,415 456,408 C449,399 442,390 435,382 C430,368 425,354 420,340 C412,327 405,314 397,302 C398,288 399,274 400,261 C399,247 398,232 398,218 C396,210 395,202 394,194 Z" fill="none" stroke="#7e9a64" stroke-width="4"/>
+    <g class="lyr-rail"><circle class="m-stn" cx="422" cy="62" r="4"/><circle class="m-stn" cx="394" cy="194" r="4"/><circle class="m-stn" cx="398" cy="218" r="4"/><circle class="m-stn" cx="400" cy="261" r="4"/><circle class="m-stn" cx="397" cy="302" r="4"/><circle class="m-stn" cx="420" cy="340" r="4"/><circle class="m-stn" cx="435" cy="382" r="4"/><circle class="m-stn" cx="469" cy="430" r="4"/><circle class="m-stn" cx="496" cy="400" r="4"/><circle class="m-stn" cx="519" cy="343" r="4"/><circle class="m-stn" cx="545" cy="311" r="4"/><circle class="m-stn" cx="548" cy="274" r="4"/><circle class="m-stn" cx="571" cy="224" r="4"/><circle class="m-stn" cx="586" cy="166" r="4"/><circle class="m-stn" cx="597" cy="114" r="4"/><circle class="m-stn" cx="581" cy="70" r="4"/></g>
+    <text class="m-mut" x="422" y="48" text-anchor="middle">Ikebukuro</text>
+    <text class="m-mut" x="552" y="62" text-anchor="end">Yanaka / Nezu</text>
+    <text class="m-mut" x="610" y="112">Ueno</text>
+    <text class="m-mut" x="499" y="150" text-anchor="middle">Kagurazaka</text>
+    <text class="m-red" x="598" y="170">Akihabara</text>
+    <text class="m-mut" x="652" y="180">Ryogoku</text>
+    <text class="m-mut" x="588" y="238">Tokyo Sta.</text>
+    <g><rect x="592" y="246" width="20" height="66" rx="5" fill="#b0432f" stroke="#7c2d1f" stroke-width="1.5"/><text class="m-ban" text-anchor="middle"><tspan x="602" y="261">G</tspan><tspan x="602" dy="11.5">i</tspan><tspan x="602" dy="11.5">n</tspan><tspan x="602" dy="11.5">z</tspan><tspan x="602" dy="11.5">a</tspan></text></g>
+    <text class="m-mut" x="556" y="300" text-anchor="end">Tsukiji</text>
+    <text class="m-mut" x="490" y="242" text-anchor="middle">Akasaka</text>
+    <text class="m-mut" x="476" y="290" text-anchor="middle">Roppongi</text>
+    <g class="lyr-icon" stroke="#b0432f" stroke-width="2" fill="none"><line x1="506" y1="316" x2="513" y2="284"/><line x1="520" y1="316" x2="513" y2="284"/><line x1="508" y1="305" x2="518" y2="305"/></g>
+    <text class="m-mut" x="513" y="330" text-anchor="middle">Tokyo Tower</text>
+    <text class="m-mut" x="496" y="418" text-anchor="middle">Shinagawa</text>
+    <text class="m-mut" x="449" y="388">Meguro</text>
+    <text class="m-mut" x="432" y="346">Ebisu</text>
+    <text class="m-mut" x="389" y="364" text-anchor="middle">Nakameguro</text>
+    <text class="m-mut" x="392" y="326" text-anchor="end">Daikanyama</text>
+    <g><rect x="404" y="306" width="72" height="22" rx="6" fill="#b0432f" stroke="#7c2d1f" stroke-width="1.5"/><text class="m-ban" x="440" y="321.5" text-anchor="middle">Shibuya</text></g>
+    <text class="m-red" x="352" y="265" text-anchor="end">Harajuku</text>
+    <g><rect x="268" y="184" width="80" height="22" rx="6" fill="#b0432f" stroke="#7c2d1f" stroke-width="1.5"/><text class="m-ban" x="308" y="199.5" text-anchor="middle">Shinjuku</text></g>
+    <text class="m-mut" x="424" y="232" text-anchor="middle">Shinjuku Gyoen</text>
+    <text class="m-mut" x="536" y="188" text-anchor="middle">Imperial Palace</text>
+    <g><rect x="700" y="138" width="20" height="92" rx="5" fill="#b0432f" stroke="#7c2d1f" stroke-width="1.5"/><text class="m-ban" text-anchor="middle"><tspan x="710" y="153">A</tspan><tspan x="710" dy="11.5">s</tspan><tspan x="710" dy="11.5">a</tspan><tspan x="710" dy="11.5">k</tspan><tspan x="710" dy="11.5">u</tspan><tspan x="710" dy="11.5">s</tspan><tspan x="710" dy="11.5">a</tspan></text></g>
+    <text class="m-red" x="686" y="52" text-anchor="middle">Skytree</text>
+    <text class="m-mut" x="696" y="96">Sumida</text>
+    <text class="m-mut" x="303" y="116" text-anchor="middle">Nakano</text>
+    <text class="m-mut" x="260" y="160" text-anchor="middle">Koenji</text>
+    <text class="m-mut" x="72" y="190" text-anchor="middle">Kichijoji</text>
+    <text class="m-mut" x="310" y="314" text-anchor="middle">Shimokitazawa</text>
+    <text class="m-mut" x="640" y="320" text-anchor="middle">Toyosu</text>
+    <text class="m-mut" x="595" y="450" text-anchor="middle">Odaiba</text>
+    <text class="m-big" x="648" y="562" text-anchor="middle">TOKYO BAY</text>
+    <g class="lyr-icon"><rect x="558" y="228" width="24" height="10" fill="#b0432f" opacity="0.85"/><circle cx="563" cy="228" r="3" fill="#b0432f"/><circle cx="577" cy="228" r="3" fill="#b0432f"/></g>
+    <g class="lyr-icon" stroke="#b0432f" stroke-width="3" stroke-linecap="round"><line x1="377" y1="230" x2="377" y2="248"/><line x1="391" y1="230" x2="391" y2="248"/><line x1="372" y1="230" x2="396" y2="230"/><line x1="374" y1="236" x2="394" y2="236"/></g>
+    <g class="lyr-icon"><rect x="637" y="104" width="24" height="12" fill="#b0432f" opacity="0.85"/><path d="M633,104 L649,93 L665,104 Z" fill="#b0432f"/></g>
+    <g class="lyr-icon" stroke="#8a6b4a" stroke-width="2" fill="none"><line x1="686" y1="66" x2="680" y2="127"/><line x1="686" y1="66" x2="692" y2="127"/><line x1="682" y1="100" x2="690" y2="100"/><line x1="686" y1="66" x2="686" y2="58"/></g>
+    <g class="lyr-icon" stroke="#8a6b4a" stroke-width="2" fill="none"><path d="M556,370 C562,380 568,388 576,394"/><line x1="560" y1="374" x2="560" y2="364"/><line x1="572" y1="390" x2="572" y2="380"/></g>
+    <g class="mstop" data-stop="1" data-x="386" data-y="204"><circle class="m-numc" cx="386" cy="204" r="10"/><text class="m-numt" x="386" y="204" text-anchor="middle" dominant-baseline="central">1</text></g>
+    <g class="mstop" data-stop="2" data-x="396" data-y="244"><circle class="m-numc" cx="396" cy="244" r="10"/><text class="m-numt" x="396" y="244" text-anchor="middle" dominant-baseline="central">2</text></g>
+    <g class="mstop" data-stop="3" data-x="387" data-y="296"><circle class="m-numc" cx="387" cy="296" r="10"/><text class="m-numt" x="387" y="296" text-anchor="middle" dominant-baseline="central">3</text></g>
+    <g class="mstop" data-stop="4" data-x="412" data-y="264"><circle class="m-numc" cx="412" cy="264" r="10"/><text class="m-numt" x="412" y="264" text-anchor="middle" dominant-baseline="central">4</text></g>
+    <g class="mstop" data-stop="5" data-x="440" data-y="245"><circle class="m-numc" cx="440" cy="245" r="10"/><text class="m-numt" x="440" y="245" text-anchor="middle" dominant-baseline="central">5</text></g>
+    <g class="mstop" data-stop="6" data-x="533" data-y="212"><circle class="m-numc" cx="533" cy="212" r="10"/><text class="m-numt" x="533" y="212" text-anchor="middle" dominant-baseline="central">6</text></g>
+    <g class="mstop" data-stop="7" data-x="562" data-y="263"><circle class="m-numc" cx="562" cy="263" r="10"/><text class="m-numt" x="562" y="263" text-anchor="middle" dominant-baseline="central">7</text></g>
+    <g class="mstop" data-stop="8" data-x="649" data-y="111"><circle class="m-numc" cx="649" cy="111" r="10"/><text class="m-numt" x="649" y="111" text-anchor="middle" dominant-baseline="central">8</text></g>
+    <g class="mstop" data-stop="9" data-x="633" data-y="85"><circle class="m-numc" cx="633" cy="85" r="10"/><text class="m-numt" x="633" y="85" text-anchor="middle" dominant-baseline="central">9</text></g>
+    <g class="mstop" data-stop="10" data-x="303" data-y="130"><circle class="m-numc" cx="303" cy="130" r="10"/><text class="m-numt" x="303" y="130" text-anchor="middle" dominant-baseline="central">10</text></g>
+    <g class="mstop" data-stop="11" data-x="260" data-y="142"><circle class="m-numc" cx="260" cy="142" r="10"/><text class="m-numt" x="260" y="142" text-anchor="middle" dominant-baseline="central">11</text></g>
+    <g class="mstop" data-stop="12" data-x="72" data-y="158"><circle class="m-numc" cx="72" cy="158" r="10"/><text class="m-numt" x="72" y="158" text-anchor="middle" dominant-baseline="central">12</text></g>
+    <g class="mstop" data-stop="13" data-x="310" data-y="290"><circle class="m-numc" cx="310" cy="290" r="10"/><text class="m-numt" x="310" y="290" text-anchor="middle" dominant-baseline="central">13</text></g>
+    <g class="lyr-icon" stroke="#4e6b3c" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M24,606 L72,552 L120,606 Z" fill="#7d9a5e"/>
+      <path d="M55,571 L72,552 L89,571 L83,567 L77,572 L72,566 L67,572 L61,567 Z" fill="#f8f1e0"/>
+      <path d="M72,558 L62,606 M72,558 L84,600" fill="none" opacity="0.5"/>
+    </g>
+    <text class="m-mut lyr-icon" x="74" y="624" text-anchor="middle">Mt. Fuji — far west (Sat)</text>
+    <g class="lyr-icon" fill="#5f7a46" stroke="#4c5f38" stroke-width="0.8">
+      <path d="M376,252 l6,-11 l6,11 z m2,-8 l4,-8 l4,8 z"/><path d="M390,258 l5,-9 l5,9 z m1.5,-7 l3.5,-7 l3.5,7 z"/>
+      <path d="M580,102 l6,-11 l6,11 z m2,-8 l4,-8 l4,8 z"/>
+      <path d="M420,208 l5,-9 l5,9 z m1.5,-7 l3.5,-7 l3.5,7 z"/>
+    </g>
+    <g class="lyr-icon" stroke="#2f7b7c" stroke-width="1.5" fill="none" opacity="0.85">
+      <path d="M596,480 a12,12 0 0 1 24,0 m-10,0 a12,12 0 0 1 24,0"/>
+      <path d="M648,522 a12,12 0 0 1 24,0 m-10,0 a12,12 0 0 1 24,0"/>
+      <path d="M696,444 a12,12 0 0 1 24,0"/>
+      <path d="M560,586 a11,11 0 0 1 22,0"/>
+    </g>
+    </g>
+    <g id="tokclouds" filter="url(#wob)" opacity="0.97">
+      <g fill="#dcc995" opacity="0.6"><ellipse cx="40" cy="56" rx="36" ry="16"/><ellipse cx="92" cy="44" rx="44" ry="20"/><ellipse cx="150" cy="54" rx="40" ry="16"/><ellipse cx="190" cy="326" rx="40" ry="15"/><ellipse cx="240" cy="318" rx="46" ry="18"/><ellipse cx="288" cy="326" rx="36" ry="14"/><ellipse cx="688" cy="356" rx="38" ry="15"/><ellipse cx="724" cy="346" rx="40" ry="18"/><ellipse cx="196" cy="594" rx="34" ry="14"/><ellipse cx="242" cy="584" rx="42" ry="16"/><ellipse cx="460" cy="104" rx="40" ry="14"/></g>
+      <g fill="#f1e8cd"><ellipse cx="40" cy="52" rx="36" ry="16"/><ellipse cx="92" cy="40" rx="44" ry="20"/><ellipse cx="150" cy="50" rx="40" ry="16"/><ellipse cx="105" cy="58" rx="60" ry="14"/><ellipse cx="190" cy="322" rx="40" ry="15"/><ellipse cx="240" cy="314" rx="46" ry="18"/><ellipse cx="288" cy="322" rx="36" ry="14"/><ellipse cx="240" cy="330" rx="66" ry="12"/><ellipse cx="688" cy="352" rx="38" ry="15"/><ellipse cx="724" cy="342" rx="40" ry="18"/><ellipse cx="706" cy="362" rx="52" ry="12"/><ellipse cx="196" cy="590" rx="34" ry="14"/><ellipse cx="242" cy="580" rx="42" ry="16"/><ellipse cx="284" cy="590" rx="32" ry="12"/><ellipse cx="240" cy="598" rx="58" ry="11"/><ellipse cx="460" cy="100" rx="40" ry="14"/><ellipse cx="500" cy="94" rx="32" ry="12"/><ellipse cx="478" cy="108" rx="50" ry="10"/></g>
+    </g>
+    <rect id="tokgrain" x="0" y="0" width="760" height="640" rx="8" filter="url(#grain)" pointer-events="none"/>
+  </svg>
+  </div>
+  <aside class="mapkey">
+    <div id="kstopwrap" style="display:none">
+    <h3>The stops</h3>
+    <ol>
+      <li class="kstop" data-stop="1"><span class="knum">1</span><span><b>Hotel Sunroute + Udon Shin</b> · Wed–Sat</span></li>
+      <li class="kstop" data-stop="2"><span class="knum">2</span><span><b>Meiji Shrine + Yoyogi Park</b> · Fri</span></li>
+      <li class="kstop" data-stop="3"><span class="knum">3</span><span><b>Sumo experience</b>, Shibuya · Fri 9:30</span></li>
+      <li class="kstop" data-stop="4"><span class="knum">4</span><span><b>Harajuku</b> — La Forêt, PAP, 3Hermanos · Fri</span></li>
+      <li class="kstop" data-stop="5"><span class="knum">5</span><span><b>Jingu Gaien ginkgo</b> · Fri</span></li>
+      <li class="kstop" data-stop="6"><span class="knum">6</span><span><b>Imperial Palace 5K</b> · Thu dawn</span></li>
+      <li class="kstop" data-stop="7"><span class="knum">7</span><span><b>Ginza Bairin</b> katsu sando · Fri</span></li>
+      <li class="kstop" data-stop="8"><span class="knum">8</span><span><b>Senso-ji</b>, Asakusa · Thu</span></li>
+      <li class="kstop" data-stop="9"><span class="knum">9</span><span><b>Wanariya</b> indigo studio · Thu</span></li>
+      <li class="kstop" data-stop="10"><span class="knum">10</span><span><b>Nakano Broadway</b> · Thu</span></li>
+      <li class="kstop" data-stop="11"><span class="knum">11</span><span><b>Koenji</b> vintage · Thu</span></li>
+      <li class="kstop" data-stop="12"><span class="knum">12</span><span><b>ISENTEI</b>, Inokashira Park · Thu</span></li>
+      <li class="kstop" data-stop="13"><span class="knum">13</span><span><b>Shimokitazawa</b> — Oribe + vintage · Thu</span></li>
+    </ol>
+    </div>
+    <h3>Landmarks & lines</h3>
+    <ul>
+      <li><span class="ks-loop"></span><span><b>Yamanote loop</b> + stations</span></li>
+      <li><span class="ks-rail"></span><span><b>Chuo + Inokashira lines</b></span></li>
+      <li><span class="ks-river"></span><span><b>Sumida River</b></span></li>
+      <li><span class="ks-park"></span><span><b>Parks</b> — Yoyogi, Gyoen, Ueno, palace grounds</span></li>
+      <li><span class="ks-ban"></span><span><b>District banners</b> — Shinjuku, Shibuya, Ginza, Asakusa</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><g stroke="#b0432f" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="4" x2="5" y2="14"/><line x1="15" y1="4" x2="15" y2="14"/><line x1="2" y1="4" x2="18" y2="4"/><line x1="3.5" y1="8" x2="16.5" y2="8"/></g></svg><span><b>Torii</b> — Meiji Shrine</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><rect x="5" y="8" width="10" height="6" fill="#b0432f"/><path d="M3,8 L10,2 L17,8 Z" fill="#b0432f"/></svg><span><b>Temple roof</b> — Senso-ji</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><g stroke="#8a6b4a" stroke-width="1.6" fill="none"><line x1="10" y1="2" x2="7" y2="14"/><line x1="10" y1="2" x2="13" y2="14"/><line x1="8" y1="9" x2="12" y2="9"/></g></svg><span><b>Spire</b> — Tokyo Skytree</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><g stroke="#b0432f" stroke-width="1.8" fill="none"><line x1="6" y1="14" x2="10" y2="2"/><line x1="14" y1="14" x2="10" y2="2"/><line x1="7.5" y1="10" x2="12.5" y2="10"/></g></svg><span><b>A-frame</b> — Tokyo Tower</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><rect x="3" y="8" width="14" height="6" fill="#b0432f"/><circle cx="6" cy="8" r="2" fill="#b0432f"/><circle cx="14" cy="8" r="2" fill="#b0432f"/></svg><span><b>Brick facade</b> — Tokyo Station</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><g stroke="#8a6b4a" stroke-width="1.6" fill="none"><path d="M2,10 C7,4 13,4 18,10"/><line x1="4" y1="10" x2="4" y2="5"/><line x1="16" y1="10" x2="16" y2="5"/></g></svg><span><b>Rainbow Bridge</b> → Odaiba</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><path d="M2,14 L10,3 L18,14 Z" fill="#7d9a5e" stroke="#4e6b3c"/><path d="M7,7.5 L10,3 L13,7.5 Z" fill="#f8f1e0"/></svg><span><b>Mt. Fuji</b> — far west, Saturday</span></li>
+      <li><svg class="kswatch" viewBox="0 0 20 16"><g stroke="#2f7b7c" stroke-width="1.6" fill="none"><path d="M2,11 a5,5 0 0 1 10,0"/><path d="M9,13 a5,5 0 0 1 10,0"/></g></svg><span><b>Waves</b> — Tokyo Bay</span></li>
+    </ul>
+  </aside>
+  </div>
+</div>
+
+<footer>Built from a friend's tips plus crowd-tested picks, tourist traps removed.</footer>
+
+</div>
+
+<script>
+//<![CDATA[
+(function(){
+  function init(){
+  var cities = ["itinerary","tokyo","hakone","kyoto","osaka","bookings"];
+  var tabs = document.querySelectorAll(".citytab");
+
+  function showCity(id, setHash){
+    if(cities.indexOf(id) === -1) id = "tokyo";
+    document.querySelectorAll("section.city").forEach(function(s){
+      s.classList.toggle("active", s.id === id);
+    });
+    tabs.forEach(function(t){
+      t.setAttribute("aria-selected", t.dataset.city === id ? "true" : "false");
+    });
+    if(setHash){
+      try{ location.hash = id; }catch(e){}
+    }
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener("click", function(){ showCity(t.dataset.city, true); });
+  });
+
+  function fromHash(){
+    var h = (location.hash || "").replace("#","");
+    showCity(h || "tokyo", false);
+  }
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
+
+  document.querySelectorAll("section.city").forEach(function(sec){
+    var dtabs = sec.querySelectorAll(".daytab");
+    var panels = sec.querySelectorAll(".daypanel");
+    dtabs.forEach(function(btn, i){
+      btn.addEventListener("click", function(){
+        dtabs.forEach(function(b, j){ b.setAttribute("aria-selected", i === j ? "true" : "false"); });
+        panels.forEach(function(p, j){ p.classList.toggle("active", i === j); });
+      });
+    });
+  });
+
+  // Itinerary view: one day per card, stepped with arrows
+  var order = ["tokyo","hakone","kyoto","osaka"];
+  var names = {tokyo:"Tokyo", hakone:"Hakone", kyoto:"Kyoto", osaka:"Osaka"};
+  var cards = [];
+  order.forEach(function(id){
+    var sec = document.getElementById(id);
+    if(!sec) return;
+    var labels = sec.querySelectorAll(".daytab");
+    var panels = sec.querySelectorAll(".daypanel");
+    panels.forEach(function(p, i){
+      var lbl = labels[i] ? labels[i].textContent : "";
+      cards.push({cityId: id, city: names[id], label: lbl, html: p.innerHTML});
+    });
+  });
+  var idx = 0;
+  var headEl = document.getElementById("itin-head");
+  var cardEl = document.getElementById("itin-card");
+  var prevBtn = document.getElementById("itin-prev");
+  var nextBtn = document.getElementById("itin-next");
+  var stripEl = document.getElementById("itin-strip");
+  var dotEls = [];
+  if(stripEl){
+    cards.forEach(function(c, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "itin-dot ct-" + c.cityId;
+      b.textContent = c.label;
+      b.setAttribute("aria-label", c.label + " " + c.city);
+      b.addEventListener("click", function(){ idx = i; renderCard(); });
+      stripEl.appendChild(b);
+      dotEls.push(b);
+    });
+  }
+  function renderCard(){
+    if(!cards.length || !cardEl) return;
+    var c = cards[idx];
+    headEl.innerHTML = c.label + " · <span class=\"cityname ct-" + c.cityId + "\">" + c.city + "</span><small>" + (idx+1) + " of " + cards.length + "</small>";
+    cardEl.className = "ct-" + c.cityId;
+    cardEl.innerHTML = c.html;
+    prevBtn.disabled = (idx === 0);
+    nextBtn.disabled = (idx === cards.length - 1);
+    dotEls.forEach(function(d, i){ d.setAttribute("aria-current", i === idx ? "true" : "false"); });
+    cardEl.scrollTop = 0;
+  }
+  if(prevBtn && nextBtn){
+    prevBtn.addEventListener("click", function(){ if(idx > 0){ idx--; renderCard(); } });
+    nextBtn.addEventListener("click", function(){ if(idx < cards.length - 1){ idx++; renderCard(); } });
+  }
+  renderCard();
+
+  // Interactive map: zoom, pan, clickable seals
+  var map = document.getElementById("tokyomap");
+  if(map){
+    var BASE = [0,0,760,640];
+    var mvb = BASE.slice();
+    function applyVB(){
+      map.setAttribute("viewBox", mvb.join(" "));
+      var region = mvb[2] > 1150;
+      ["tokland","tokmain","tokclouds","tokgrain"].forEach(function(id){ var el = document.getElementById(id); if(el) el.style.display = region ? "none" : ""; });
+      var rl = document.getElementById("regionLayer"); if(rl) rl.style.display = region ? "" : "none";
+    }
+    function clientToSvg(cx, cy){
+      var r = map.getBoundingClientRect();
+      return [ mvb[0] + (cx - r.left)/r.width*mvb[2], mvb[1] + (cy - r.top)/r.height*mvb[3] ];
+    }
+    var TOK = [0, 0, 760, 640];
+    var CONTENT = [-12300, -900, 13600, 6200];
+    function clampAxis(v, w, lo, hi){
+      var hiA = hi - w;
+      if(hiA < lo) return lo + (hi - lo - w)/2;
+      return Math.max(lo, Math.min(hiA, v));
+    }
+    function clampVB(){
+      var B = (mvb[2] <= 762) ? TOK : CONTENT;
+      mvb[0] = clampAxis(mvb[0], mvb[2], B[0], B[0] + B[2]);
+      mvb[1] = clampAxis(mvb[1], mvb[3], B[1], B[1] + B[3]);
+    }
+    function clampedView(v){
+      var save = mvb; mvb = v.slice(); clampVB();
+      var out = mvb.slice(); mvb = save; return out;
+    }
+    var animId = null;
+    function animateTo(target){
+      if(animId) cancelAnimationFrame(animId);
+      var from = mvb.slice(), t0 = null, DUR = 380;
+      function step(ts){
+        if(t0 === null) t0 = ts;
+        var k = Math.min(1, (ts - t0)/DUR);
+        var e = 1 - Math.pow(1 - k, 3);
+        mvb = from.map(function(v, i){ return v + (target[i] - v) * e; });
+        applyVB();
+        if(k < 1) animId = requestAnimationFrame(step);
+        else { mvb = target.slice(); applyVB(); animId = null; }
+      }
+      animId = requestAnimationFrame(step);
+    }
+    function zoomAt(f, sx, sy){
+      var w = Math.min(13800, Math.max(200, mvb[2]/f));
+      var h = w * (640/760);
+      mvb[0] = sx - (sx - mvb[0]) * (w/mvb[2]);
+      mvb[1] = sy - (sy - mvb[1]) * (h/mvb[3]);
+      mvb[2] = w; mvb[3] = h;
+      clampVB(); applyVB();
+    }
+    var ptrs = {}, moved = 0;
+    map.addEventListener("pointerdown", function(e){
+      if(animId){ cancelAnimationFrame(animId); animId = null; }
+      ptrs[e.pointerId] = [e.clientX, e.clientY];
+      map.setPointerCapture(e.pointerId);
+      moved = 0; map.classList.add("panning");
+    });
+    map.addEventListener("pointermove", function(e){
+      if(!(e.pointerId in ptrs)) return;
+      var prev = ptrs[e.pointerId];
+      ptrs[e.pointerId] = [e.clientX, e.clientY];
+      var ks = Object.keys(ptrs);
+      if(ks.length === 1){
+        var dx = e.clientX - prev[0], dy = e.clientY - prev[1];
+        moved += Math.abs(dx) + Math.abs(dy);
+        var r = map.getBoundingClientRect();
+        mvb[0] -= dx * mvb[2]/r.width;
+        mvb[1] -= dy * mvb[3]/r.height;
+        clampVB(); applyVB();
+      }
+    });
+    function endPtr(e){
+      delete ptrs[e.pointerId];
+      if(Object.keys(ptrs).length === 0){ map.classList.remove("panning"); }
+    }
+    map.addEventListener("pointerup", endPtr);
+    map.addEventListener("pointercancel", endPtr);
+    function selectStop(n, zoom){
+      document.querySelectorAll(".mstop").forEach(function(g){ g.classList.toggle("sel", g.dataset.stop === n); });
+      document.querySelectorAll(".kstop").forEach(function(li){
+        var on = li.dataset.stop === n;
+        li.classList.toggle("on", on);
+        if(on) li.scrollIntoView({block:"nearest"});
+      });
+      if(zoom && n){
+        var g = document.querySelector('.mstop[data-stop="' + n + '"]');
+        if(g){
+          var w = 280, h = w*(640/760);
+          animateTo(clampedView([ (+g.dataset.x) - w/2, (+g.dataset.y) - h/2, w, h ]));
+        }
+      }
+    }
+    document.querySelectorAll(".mstop").forEach(function(g){
+      g.addEventListener("click", function(){ if(moved < 6) selectStop(g.dataset.stop, false); });
+    });
+    document.querySelectorAll(".kstop").forEach(function(li){
+      li.addEventListener("click", function(){ selectStop(li.dataset.stop, true); });
+    });
+    var zin = document.getElementById("mz-in"), zout = document.getElementById("mz-out"), zres = document.getElementById("mz-reset");
+    if(zin) zin.addEventListener("click", function(){ zoomAt(1.7, mvb[0]+mvb[2]/2, mvb[1]+mvb[3]/2); });
+    if(zout) zout.addEventListener("click", function(){ zoomAt(1/1.7, mvb[0]+mvb[2]/2, mvb[1]+mvb[3]/2); });
+    if(zres) zres.addEventListener("click", function(){ animateTo(BASE.slice()); selectStop("", false); });
+    var zworld = document.getElementById("mz-world");
+    var WORLDVIEW = [-12250, -2400, 13800, 11621];
+    if(zworld) zworld.addEventListener("click", function(){ animateTo(clampedView(WORLDVIEW.slice())); selectStop("", false); });
+    document.querySelectorAll(".rcity").forEach(function(el){
+      el.addEventListener("click", function(){
+        if(moved >= 6) return;
+        if(el.dataset.city === "tokyo"){ animateTo(BASE.slice()); }
+        else {
+          var w = 3400, h = w * (640/760);
+          animateTo(clampedView([ (+el.dataset.x) - w/2, (+el.dataset.y) - h/2, w, h ]));
+        }
+      });
+    });
+    var MVIEWS = {
+      all: [0, 0, 760, 640],
+      west: [20, 46, 390, 328.4],
+      central: [250, 89, 400, 336.8],
+      old: [420, 0, 340, 286.3],
+      bay: [392, 300, 368, 309.9]
+    };
+    document.querySelectorAll(".mtab").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        document.querySelectorAll(".mtab").forEach(function(b){ b.setAttribute("aria-selected", b === btn ? "true" : "false"); });
+        if(btn.dataset.view === "route"){ animateTo(clampedView(WORLDVIEW.slice())); }
+        else { animateTo(clampedView(MVIEWS[btn.dataset.view].slice())); }
+        selectStop("", false);
+      });
+    });
+    document.querySelectorAll(".mtog").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var on = !btn.classList.contains("on");
+        btn.classList.toggle("on", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        if(btn.dataset.layer === "stops"){
+          document.querySelectorAll(".mstop").forEach(function(el){ el.style.display = on ? "" : "none"; });
+          var kw = document.getElementById("kstopwrap"); if(kw) kw.style.display = on ? "" : "none";
+          if(!on) selectStop("", false);
+          return;
+        }
+        var sel = btn.dataset.layer === "icons" ? ".lyr-icon" : ".lyr-rail";
+        document.querySelectorAll(sel).forEach(function(el){ el.style.display = on ? "" : "none"; });
+      });
+    });
+    document.querySelectorAll(".mstop").forEach(function(el){ el.style.display = "none"; });
+  }
+  }
+  if(document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
+})();
+//]]>
+</script>
+</body>
+</html>
