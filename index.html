@@ -186,6 +186,23 @@ footer{margin-top:44px; color:var(--mut); font-size:.85rem; border-top:1px solid
   .trek{display:block; position:fixed; z-index:20; top:max(24px, calc(50vh - 226px)); right:max(24px, calc((100vw - 1208px)/2)); margin:0;}
   .trek canvas{display:block; width:320px; height:448px; image-rendering:pixelated; image-rendering:crisp-edges; border:2px solid var(--rule); border-radius:14px;}
 }
+.lofi{
+  position:fixed; z-index:35; right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  font:inherit; font-weight:700; font-size:.85rem; color:var(--ink);
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  padding:8px 16px; border-radius:999px; border:2px solid var(--rule); background:var(--soft);
+  cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+.lofi:focus-visible{outline:3px solid var(--mut); outline-offset:2px;}
+.lofi .eq{display:inline-flex; align-items:flex-end; gap:2px; height:12px;}
+.lofi .eq i{width:3px; height:12px; background:var(--c-kyoto); border-radius:1px; transform-origin:bottom; transform:scaleY(.35);}
+.lofi[aria-pressed="true"] .eq i{animation:eq .8s ease-in-out infinite alternate;}
+.lofi .eq i:nth-child(2){animation-delay:-.3s;} .lofi .eq i:nth-child(3){animation-delay:-.55s;}
+@keyframes eq{from{transform:scaleY(.25);} to{transform:scaleY(1);}}
+@media (prefers-reduced-motion: reduce){.lofi[aria-pressed="true"] .eq i{animation:none; transform:scaleY(.8);}}
+@media (min-width:1260px){
+  .lofi{top:calc(max(24px, calc(50vh - 226px)) + 464px); bottom:auto; right:max(24px, calc((100vw - 1208px)/2)); width:324px;}
+}
 </style>
 </head>
 <body>
@@ -888,6 +905,7 @@ footer{margin-top:44px; color:var(--mut); font-size:.85rem; border-top:1px solid
 </div>
 
 <figure class="trek" aria-hidden="true"><canvas id="trek-cv" width="160" height="224"></canvas></figure>
+<button id="lofi-btn" class="lofi" type="button" aria-pressed="false"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl">Play lofi</span></button>
 
 <script>
 //<![CDATA[
@@ -1456,6 +1474,131 @@ function stop(){running=false; cancelAnimationFrame(raf);}
 wide.addEventListener('change',()=>wide.matches?start():stop());
 still.addEventListener('change',()=>{stop(); start();});
 start();
+})();
+</script>
+<script>
+(function(){
+// Lofi radio: an endless track generated live with Web Audio. Royal-road progression
+// (IVmaj7 - V7 - iii7 - vi7), electric piano, koto melody in the yo scale, swung drums, vinyl crackle.
+const btn=document.getElementById('lofi-btn'); if(!btn) return;
+const lbl=btn.querySelector('.lbl');
+const BPM=74, SPB=60/BPM, S16=SPB/4, TR=-2, VOL=.55;
+const CHORDS=[[53,57,60,64,67],[55,59,62,65,69],[52,55,59,62,67],[57,60,64,67,71]];
+const BASS=[41,43,40,45];
+const YO=[67,69,72,74,77,79,81,84];
+const mtof=m=>440*Math.pow(2,(m+TR-69)/12);
+let ctx, master, bus, verb, lfoG, noise, timer=0, nextT=0, step=0, phrase=false, mi=3, playing=false, stopT=0;
+
+function init(){
+  ctx=new (window.AudioContext||window.webkitAudioContext)();
+  master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
+  const comp=ctx.createDynamicsCompressor(); comp.threshold.value=-18; comp.ratio.value=3; comp.connect(master);
+  const lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=3200; lp.Q.value=.3; lp.connect(comp);
+  bus=ctx.createGain(); bus.connect(lp);
+  verb=ctx.createConvolver(); verb.buffer=impulse(2.4);
+  const vg=ctx.createGain(); vg.gain.value=.3; verb.connect(vg); vg.connect(lp);
+  const lfo=ctx.createOscillator(); lfo.frequency.value=.45; lfoG=ctx.createGain(); lfoG.gain.value=7; lfo.connect(lfoG); lfo.start();
+  noise=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate);
+  const d=noise.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+  crackle();
+}
+function impulse(sec){
+  const n=ctx.sampleRate*sec, b=ctx.createBuffer(2,n,ctx.sampleRate);
+  for(let c=0;c<2;c++){const d=b.getChannelData(c); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);}
+  return b;
+}
+function crackle(){
+  const n=ctx.sampleRate*5, b=ctx.createBuffer(1,n,ctx.sampleRate), d=b.getChannelData(0);
+  for(let i=0;i<n;i++){
+    d[i]+=(Math.random()*2-1)*.012;
+    if(Math.random()<.00025){const a=(Math.random()*.5+.2)*(Math.random()<.5?-1:1); for(let k=0;k<30&&i+k<n;k++) d[i+k]+=a*Math.exp(-k/4);}
+  }
+  const s=ctx.createBufferSource(); s.buffer=b; s.loop=true;
+  const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=2500; f.Q.value=.5;
+  const g=ctx.createGain(); g.gain.value=.45;
+  s.connect(f); f.connect(g); g.connect(master); s.start();
+}
+function env(g,t,peak,end){g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(peak,t+.006); g.gain.exponentialRampToValueAtTime(.0001,end);}
+function out(node,wet){node.connect(bus); if(wet) node.connect(verb);}
+
+// Electric piano: a sine carrier with a decaying FM bell, wobbled by the tape LFO
+function key(m,t,v,dur){
+  const f=mtof(m), o=ctx.createOscillator(), mod=ctx.createOscillator(), mg=ctx.createGain(), g=ctx.createGain();
+  o.frequency.value=f; mod.frequency.value=f;
+  mg.gain.setValueAtTime(f*1.1*v,t); mg.gain.exponentialRampToValueAtTime(f*.04,t+.6);
+  mod.connect(mg); mg.connect(o.frequency); lfoG.connect(o.detune);
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.075*v,t+.008);
+  g.gain.exponentialRampToValueAtTime(.035*v,t+.5); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g); out(g,true);
+  o.start(t); mod.start(t); o.stop(t+dur+.05); mod.stop(t+dur+.05);
+  o.onended=()=>{try{lfoG.disconnect(o.detune);}catch(e){}};
+}
+// Koto: plucked triangle + saw through a closing filter, sometimes with a press bend up a whole tone
+function koto(m,t,v,bend){
+  const f=mtof(m), o=ctx.createOscillator(), o2=ctx.createOscillator(), o2g=ctx.createGain(), lp=ctx.createBiquadFilter(), g=ctx.createGain();
+  o.type='triangle'; o2.type='sawtooth'; o.frequency.value=f; o2.frequency.value=f*1.002; o2g.gain.value=.3;
+  lp.type='lowpass'; lp.frequency.setValueAtTime(f*6,t); lp.frequency.exponentialRampToValueAtTime(f*1.4,t+.45);
+  if(bend) for(const x of [o,o2]){const b=x.frequency.value; x.frequency.setValueAtTime(b,t+.2); x.frequency.linearRampToValueAtTime(b*1.1225,t+.34);}
+  env(g,t,.07*v,t+1.6);
+  o.connect(lp); o2.connect(o2g); o2g.connect(lp); lp.connect(g); out(g,true);
+  o.start(t); o2.start(t); o.stop(t+1.7); o2.stop(t+1.7);
+}
+function bass(m,t,dur){
+  const o=ctx.createOscillator(), lp=ctx.createBiquadFilter(), g=ctx.createGain();
+  o.type='triangle'; o.frequency.value=mtof(m); lp.type='lowpass'; lp.frequency.value=420;
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.26,t+.015); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(lp); lp.connect(g); out(g,false); o.start(t); o.stop(t+dur+.05);
+}
+function kick(t){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  o.frequency.setValueAtTime(115,t); o.frequency.exponentialRampToValueAtTime(42,t+.12);
+  env(g,t,.42,t+.35); o.connect(g); out(g,false); o.start(t); o.stop(t+.4);
+}
+function hit(t,type,freq,q,peak,len){
+  const s=ctx.createBufferSource(), f=ctx.createBiquadFilter(), g=ctx.createGain();
+  s.buffer=noise; s.playbackRate.value=.8+Math.random()*.4; f.type=type; f.frequency.value=freq; f.Q.value=q;
+  env(g,t,peak,t+len); s.connect(f); f.connect(g); out(g,type==='bandpass'); s.start(t,Math.random()*.5); s.stop(t+len+.02);
+}
+function snare(t){
+  hit(t,'bandpass',1700,.7,.13,.2);
+  const o=ctx.createOscillator(), g=ctx.createGain(); o.type='triangle'; o.frequency.value=185;
+  env(g,t,.08,t+.07); o.connect(g); out(g,false); o.start(t); o.stop(t+.1);
+}
+
+function schedule(s,t){
+  const st=s%16, b=Math.floor(s/16), ci=b%4, T=t+(st%4===2?S16*.28:0), hum=()=>(Math.random()-.5)*.012;
+  if(st===0){
+    CHORDS[ci].forEach((m,k)=>key(m,T+k*.013+hum(),.8+Math.random()*.2,SPB*3.3));
+    bass(BASS[ci],T,SPB*1.8);
+    phrase=b>=1 && Math.random()<.6;
+  }
+  if(st===10 && Math.random()<.55) CHORDS[ci].slice(1).forEach((m,k)=>key(m,T+k*.01+hum(),.5,SPB*1.4));
+  if(st===8) bass(BASS[ci]+(Math.random()<.5?12:7),T,SPB*1.3);
+  if(b>=2){
+    if(st===0||st===10||(st===7&&Math.random()<.45)) kick(T);
+    if(st===4||st===12) snare(T+.01);
+    if(st%2===0 && Math.random()>.08) hit(T+hum(),'highpass',7200,.5,st%4===0?.035:.02,.05);
+  }
+  if(phrase && st%2===0 && Math.random()<.38){
+    mi=Math.max(0,Math.min(YO.length-1,mi+[-2,-1,-1,1,1,2][(Math.random()*6)|0]));
+    koto(YO[mi],T+hum(),.7+Math.random()*.3,Math.random()<.15);
+  }
+}
+function tick(){while(nextT<ctx.currentTime+.2){schedule(step,nextT); nextT+=S16; step++;}}
+
+function setUI(on){btn.setAttribute('aria-pressed',on?'true':'false'); lbl.textContent=on?'Pause lofi':'Play lofi';}
+btn.addEventListener('click',()=>{
+  if(!ctx) init();
+  playing=!playing; setUI(playing); clearTimeout(stopT);
+  const now=ctx.currentTime;
+  if(playing){
+    ctx.resume(); master.gain.cancelScheduledValues(now); master.gain.setTargetAtTime(VOL,now,.6);
+    if(!timer){nextT=now+.1; timer=setInterval(tick,25);}
+  }else{
+    master.gain.cancelScheduledValues(now); master.gain.setTargetAtTime(0,now,.25);
+    stopT=setTimeout(()=>{clearInterval(timer); timer=0; ctx.suspend();},1200);
+  }
+});
 })();
 </script>
 </body>
